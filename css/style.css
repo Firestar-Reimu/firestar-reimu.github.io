@@ -617,7 +617,7 @@ article#tag .all-tags ul li span:before {
   color: rgba(68,68,68,0.9);
 }
 .article code {
-  font-family: "Noto Sans CJK SC", "PingFang SC", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "JetBrains Mono NL", "Noto Mono", Consolas, Monaco, monospace, courier, sans-serif;
 }
 .article code:not([class]) {
   word-break: break-all;
