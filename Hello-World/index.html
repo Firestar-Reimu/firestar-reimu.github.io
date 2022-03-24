@@ -7,9 +7,9 @@
   
   <link rel="canonical" href="https://blog.firestar-reimu.top/hello-world/"/>
   <!-- 渲染优化 -->
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <!-- <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin> -->
   <meta name="renderer" content="webkit">
   <meta name="force-rendering" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -20,22 +20,23 @@
   <meta content="Firestar 的幻想乡" name="apple-mobile-web-app-title">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
-  <link rel="preload" href="/css/style.css?time=1645029769556" as="style">
+  <link rel="preload" href="/css/style.css?time=1648099524278" as="style">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- 页面元数据 -->
   <title>Hello World - Firestar 的幻想乡</title>
   <meta name="keywords" content="Hello World,Blog,null">
-  <meta name="description" content="申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（可选） 申请域名我选择的是阿里云，在万网输入自己想要的域名并购买。一般来讲 .top 最便宜，.xyz 次之。 假设域名为 example.top 根据网站提示做好域名实名制认证等流程。在域名控制台中选择">
+  <meta name="description" content="申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（可选） 申请域名我选择的是阿里云，在万网输入自己想要的域名并购买。一般来讲 .top 最便宜，.xyz 次之。 假设域名为 example.top 根据网站提示做好域名实名制认证等流程。在域名控制台中选择：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
 <meta property="og:url" content="https://blog.firestar-reimu.top/Hello-World/">
 <meta property="og:site_name" content="Firestar 的幻想乡">
-<meta property="og:description" content="申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（可选） 申请域名我选择的是阿里云，在万网输入自己想要的域名并购买。一般来讲 .top 最便宜，.xyz 次之。 假设域名为 example.top 根据网站提示做好域名实名制认证等流程。在域名控制台中选择">
+<meta property="og:description" content="申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（可选） 申请域名我选择的是阿里云，在万网输入自己想要的域名并购买。一般来讲 .top 最便宜，.xyz 次之。 假设域名为 example.top 根据网站提示做好域名实名制认证等流程。在域名控制台中选择：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2021-09-06T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-16T16:30:03.380Z">
+<meta property="article:modified_time" content="2022-02-26T06:44:23.814Z">
 <meta property="article:author" content="Firestar">
 <meta property="article:tag" content="Hello World">
 <meta property="article:tag" content="Blog">
@@ -824,7 +825,7 @@ button {
 }
 @font-face {
   font-family: 'Noto Sans';
-  src: url("");
+  src: url("/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1660,8 +1661,8 @@ ul.list-v >li>a:hover {
 }
 
   </style>
-  <link rel="stylesheet" href="/css/style.css?time=1645029769556" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.css?time=1645029769556"></noscript>
+  <link rel="stylesheet" href="/css/style.css?time=1648099524278" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css?time=1648099524278"></noscript>
   
 <script>
 if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
@@ -1728,7 +1729,44 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <script>
   /************这个文件存放不需要重载的全局变量和全局函数*********/
   window.volantis = {}; // volantis 全局变量
+  volantis.debug = false; // 开启调试模式
   volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    cdn: {"js":{"app":"/js/app.js?time=1648099524278","sites":"/js/plugins/sites.js?time=1648099524278","friends":"/js/plugins/friends.js?time=1648099524278","parallax":"/js/plugins/parallax.js?time=1648099524278","rightMenu":"/js/plugins/rightMenu.js?time=1648099524278","contributors":"/js/plugins/contributors.js?time=1648099524278","message":"/js/thirdparty/message.js?time=1648099524278","valine":"https://npm.elemecdn.com/valine@1.4/dist/Valine.min.js?time=1648099524278","search":"/js/search/hexo.js?time=1648099524278"},"css":{"style":"/css/style.css?time=1648099524278","message":"/css/message.css?time=1648099524278"}},
+    default: {"avatar":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/avatar/round/3442075.svg","link":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg","cover":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/cover/76b86c0226ffd.svg","image":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg"},
+    lastupdate: new Date('Thu Mar 24 2022 13:25:24 GMT+0800 (China Standard Time)'),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"icon":{"default":"fas fa-info-circle light-blue","quection":"fas fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fas fa-play","pause":"fas fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"/libs/@fancyapps/ui/dist/fancybox.css","js":"/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      aplayer: {
+        id: 3175833810,
+        enable:null
+      },
+      rightmenu: {
+        faicon: "fa",
+        layout: ["home","hr","help","examples","contributors","hr","source_docs","source_theme","hr","print","darkmode","reading","music"],
+        music_alwaysShow: true,
+        customPicUrl: {"enable":false,"old":null,"new":null},
+        print: true
+      }
+    }
+  }
+
   /******************** volantis.EventListener ********************************/
   // 事件监听器 see: /source/js/app.js
   volantis.EventListener = {}
@@ -1890,8 +1928,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     push: volantis.dark.method.toggle.push,
   };
   /********************  Message  ********************************/
-  // /layout/_plugins/message/script.ejs
-  // volantis.message
+  // VolantisApp.message
   /********************  isMobile  ********************************/
   // /source/js/app.js
   // volantis.isMobile
@@ -1956,7 +1993,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   volantis.import = {
     jQuery: () => {
       if (typeof jQuery == "undefined") {
-        return volantis.js("https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js")
+        return volantis.js("https://npm.elemecdn.com/jquery@3.5/dist/jquery.min.js")
       } else {
         return new Promise(resolve => {
           resolve()
@@ -2088,9 +2125,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='nav-sub'>
       <p class="title"></p>
       <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
         
-          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
         
       </ul>
     </div>
@@ -2099,7 +2136,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png' alt="This is a picture without description" />
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
           
@@ -2215,20 +2252,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 				</ul>
 			</div>
-
+      
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
-          <i class="icon fas fa-search fa-fw"></i>
+          <i class="icon fa-solid fa-search fa-fw"></i>
           <input type="text" class="input u-search-input" placeholder="Search..." />
         </form>
       </div>
+      
 
 			<ul class='switcher nav-list-h m-phone'>
 				
-					<li><a class="s-search fas fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
 				
 				<li>
-          <a class="s-menu fas fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
           <ul class="menu-phone list-v navigation white-box">
             
               
@@ -2371,42 +2409,42 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
               
               active-action="action-v4getting-started">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg' alt="This is a picture without description" ><p>文档</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
             </a>
           
             <a href="/faqs/"
               
               
               active-action="action-faqs">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg' alt="This is a picture without description" ><p>帮助</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
             </a>
           
             <a href="/examples/"
               
               
               active-action="action-examples">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg' alt="This is a picture without description" ><p>示例</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
             </a>
           
             <a href="/contributors/"
               
               
               active-action="action-contributors">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg' alt="This is a picture without description" ><p>社区</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
             </a>
           
             <a href="/archives/"
               
               
               active-action="action-archives">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg' alt="This is a picture without description" ><p>博客</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
             </a>
           
             <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
               
               
               active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg' alt="This is a picture without description" ><p>源码</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg'><p>源码</p>
             </a>
           
         
@@ -2430,6 +2468,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Firestar 的幻想乡">
   </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="Firestar 的幻想乡">
+    <meta itemprop="description" content="">
+  </span>
   
 
 
@@ -2451,7 +2493,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="/images/favicon.ico" class="lazyload" data-srcset="/images/favicon.ico" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+    <img itemprop="image" src="/images/favicon.ico" class="lazyload" data-srcset="/images/favicon.ico" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
     <p itemprop="name">Firestar</p>
   </a>
 </div>
@@ -2475,7 +2517,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
             <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2021-09-06T12:00:00+08:00">
-  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+  <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
     <p>发布于：2021年9月6日</p>
   </a>
@@ -2498,7 +2540,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22636684&auto=1&height=66"></iframe> 
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22636684&auto=1&height=66"></iframe>
 
 <h3 id="申请-GitHub-Pages"><a href="#申请-GitHub-Pages" class="headerlink" title="申请 GitHub Pages"></a>申请 GitHub Pages</h3><p>新建一个 repository，命名为 <code>(user_name).github.io</code>，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（可选）</p>
 <h3 id="申请域名"><a href="#申请域名" class="headerlink" title="申请域名"></a>申请域名</h3><p>我选择的是阿里云，在<a target="_blank" rel="noopener" href="https://wanwang.aliyun.com/">万网</a>输入自己想要的域名并购买。一般来讲 <code>.top</code> 最便宜，<code>.xyz</code> 次之。 假设域名为 <code>example.top</code> 根据网站提示做好域名实名制认证等流程。在<a target="_blank" rel="noopener" href="https://dc.console.aliyun.com/next/#/domain/list/all-domain">域名控制台</a>中选择：域名 &gt;&gt; 操作 &gt;&gt; 解析</p>
@@ -2510,7 +2552,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>建议在 Linux 上搭建，而不用 Windows</p>
 <p>下载 Node-js 和 npm：<code>sudo pacman -S nodejs npm</code></p>
 <p>下载 Hexo 的方法如下：（推荐如下的全局下载方案）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.npm-global</span><br><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&#x27;~/.npm-global&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/.npm-global</span><br><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&#x27;~/.npm-global&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>然后在 <code>~/.profile</code> 中加入一行：<code>export PATH=~/.npm-global/bin:$PATH</code></p>
 <p>最后输入：（npm 5.0.0 开始，默认安装不需要 <code>–-save</code> 选项，已经可以自动执行）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.profile</span><br><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
@@ -2527,44 +2569,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-volantis</span><br></pre></td></tr></table></figure>
 <p>这样的话它会保存在<code>(hexo_folder)/node_modules/hexo-theme-fluid</code>（下文称为“<strong>主题目录</strong>”），更新主题需要在<code>(hexo_folder)</code>下执行<code>npm update hexo-theme-volantis</code></p>
 <p>可以在 <code>(hexo_folder)/themes</code> 中创建软链接：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s ../node_modules/hexo-theme-volantis/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s ../node_modules/hexo-theme-volantis/</span><br></pre></td></tr></table></figure>
 <p>可以卸载自带的默认主题 Landscape：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-theme-landscape</span><br></pre></td></tr></table></figure>
 <p>Volantis 配置的官方指南在 <a target="_blank" rel="noopener" href="https://volantis.js.org/v5/getting-started/">https://volantis.js.org/v5/getting-started/</a></p>
 <p>在<code>(hexo_folder)/_config.yml</code>下修改：<code>theme:volantis</code></p>
 <p>在博客目录下创建 <code>_config.volantis.yml</code> 文件，以后如果修改任何主题配置，都只需修改 <code>_config.volantis.yml</code> 的配置即可，其优先级比主题目录下的 <code>_config.yml</code>高</p>
 <ul>
-<li><p>更改用于浏览器标签的图标：<code>favicon: /img/favicon.png</code>，<code>apple_touch_icon</code>同步修改</p>
-</li>
-<li><p><code>force_https: true</code></p>
-</li>
-<li><p>代码高亮：<code>highlightjs: style: &quot;Vs&quot;</code></p>
-</li>
-<li><p>打字机打印速度：<code>typespeed: 64</code>，不开启循环播放</p>
-</li>
-<li><p>为文章内容中的标题添加锚图标：<code>icon: &quot;§&quot;</code></p>
-</li>
-<li><p>主题字体配置：</p>
-</li>
+<li>主题字体设置</li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">font:</span></span><br><span class="line">    <span class="attr">font_size:</span> <span class="string">16px</span></span><br><span class="line">    <span class="attr">font_family:</span> <span class="string">Noto</span> <span class="string">Sans</span> <span class="string">CJK</span> <span class="string">SC,</span> <span class="string">sans-serif</span></span><br><span class="line">    <span class="attr">code_font_size:</span> <span class="number">100</span><span class="string">%</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>导航栏左侧的标题：<code>blog_title: &quot;Home&quot;</code></p>
-</li>
-<li><p>关于页中 <code>icons</code> 一项只保留 GitHub</p>
-</li>
-<li><p>每个页面的 Banner 头图：<code>banner_img</code> ，自选</p>
-</li>
-<li><p>首页副标题（slogan）的独立设置：<code>slogan: text:</code> 自选</p>
-</li>
-<li><p>自动截取文章摘要：<code>auto_excerpt: enable: false</code></p>
-</li>
-<li><p>隐藏版权声明：<code>copyright: enable: false</code></p>
-</li>
-<li><p>MathJax 渲染（虽然慢但是支持比 Katex 多而且字体更美观）：严格按照<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/##latex-数学公式">官方文档</a>，记得更改渲染引擎为<code>hexo-renderer-kramed</code> 并删掉原有的 <code>hexo-renderer-marked</code> ，书写格式见下方 <strong>LaTeX Test</strong> 一节，如需使用，需在 Front-matter 中指定 <code>math: true</code>，支持行内公式（和行间公式）。但是这样会修改丢失对 Markdown 复选框的支持，开启则需要将如下代码加入到本地的<code>(hexo_folder)/node_modules/hexo-renderer-kramed/lib/renderer.js</code>的第19行中（参考<a target="_blank" rel="noopener" href="https://corecabin.cn/2021/08/14/solve-some-problems-of-hexo-renderer-kramed-rendering-conflicts/">这里</a>），行内公式和行内代码冲突也可以参考<a target="_blank" rel="noopener" href="https://corecabin.cn/2021/08/14/solve-some-problems-of-hexo-renderer-kramed-rendering-conflicts/">这里</a></p>
-</li>
+<li>MathJax 渲染（虽然慢但是支持比 KaTeX 多而且字体更美观）：严格按照<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/##latex-数学公式">官方文档</a>，记得更改渲染引擎为<code>hexo-renderer-kramed</code> 并删掉原有的 <code>hexo-renderer-marked</code> ，书写格式见下方 <strong>LaTeX Test</strong> 一节，如需使用，需在 Front-matter 中指定 <code>math: true</code>，支持行内公式（和行间公式）。但是这样会修改丢失对 Markdown 复选框的支持，开启则需要将如下代码加入到本地的<code>(hexo_folder)/node_modules/hexo-renderer-kramed/lib/renderer.js</code>的第19行中（参考<a target="_blank" rel="noopener" href="https://corecabin.cn/2021/08/14/solve-some-problems-of-hexo-renderer-kramed-rendering-conflicts/">这里</a>），行内公式和行内代码冲突也可以参考<a target="_blank" rel="noopener" href="https://corecabin.cn/2021/08/14/solve-some-problems-of-hexo-renderer-kramed-rendering-conflicts/">这里</a></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Support To-Do List</span></span><br><span class="line">Renderer.prototype.listitem = <span class="function"><span class="keyword">function</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="regexp">/^\s*\[[x ]\]\s*/</span>.test(text)) &#123;</span><br><span class="line">    text = text.replace(<span class="regexp">/^\s*\[ \]\s*/</span>, <span class="string">&#x27;&lt;input type=&quot;checkbox&quot;&gt;&lt;/input&gt; &#x27;</span>).replace(<span class="regexp">/^\s*\[x\]\s*/</span>, <span class="string">&#x27;&lt;input type=&quot;checkbox&quot; checked&gt;&lt;/input&gt; &#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;li style=&quot;list-style: none&quot;&gt;&#x27;</span> + text + <span class="string">&#x27;&lt;/li&gt;\n&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;li&gt;&#x27;</span> + text + <span class="string">&#x27;&lt;/li&gt;\n&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Support To-Do List</span></span><br><span class="line"><span class="title class_">Renderer</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">listitem</span> = <span class="keyword">function</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="regexp">/^\s*\[[x ]\]\s*/</span>.<span class="title function_">test</span>(text)) &#123;</span><br><span class="line">    text = text.<span class="title function_">replace</span>(<span class="regexp">/^\s*\[ \]\s*/</span>, <span class="string">&#x27;&lt;input type=&quot;checkbox&quot;&gt;&lt;/input&gt; &#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/^\s*\[x\]\s*/</span>, <span class="string">&#x27;&lt;input type=&quot;checkbox&quot; checked&gt;&lt;/input&gt; &#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;li style=&quot;list-style: none&quot;&gt;&#x27;</span> + text + <span class="string">&#x27;&lt;/li&gt;\n&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;li&gt;&#x27;</span> + text + <span class="string">&#x27;&lt;/li&gt;\n&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="如何用“友链”页的模板创建一个“工具”页"><a href="#如何用“友链”页的模板创建一个“工具”页" class="headerlink" title="如何用“友链”页的模板创建一个“工具”页"></a>如何用“友链”页的模板创建一个“工具”页</h3><p>首先新建一个页面：<code>npx hexo new page tools</code>，注意发表文章要将模板 <code>page</code> 改为 <code>post</code></p>
 <p>这样就有了 <code>example.top/tools/</code> 的页面</p>
 <p>再找到 <code>icon-tools</code> 的图标：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Xiaoming782893687/article/details/90744911">https://blog.csdn.net/Xiaoming782893687/article/details/90744911</a></p>
@@ -2577,7 +2595,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h3 id="如何在导航栏菜单创建一个-GitHub-链接"><a href="#如何在导航栏菜单创建一个-GitHub-链接" class="headerlink" title="如何在导航栏菜单创建一个 GitHub 链接"></a>如何在导航栏菜单创建一个 GitHub 链接</h3><p>和创建“工具”方法类似，这次需要找到 <code>icon-github</code>（自带图标太小了）的图标</p>
 <p>实际操作是：在 <code>custom_css</code> 一栏中加入 <code>- //at.alicdn.com/t/font_2794470_brhhjh3wx87.css</code>，然后就可以在导航栏菜单 <code>menu:</code> 一栏中加入 <code>- &#123; key: &quot;GitHub&quot;, link: &quot;https://github.com/(user_name)&quot;, icon: &quot;iconfont icon-github&quot; &#125;</code> 即可</p>
 <h3 id="加入特效：鼠标点击有小红心"><a href="#加入特效：鼠标点击有小红心" class="headerlink" title="加入特效：鼠标点击有小红心"></a>加入特效：鼠标点击有小红心</h3><p>在主题目录下的 <code>/source/js</code> 文件夹中新建文件 <code>love.js</code>，在 <code>love.js</code> 文件中添加以下代码：（修改过，更新了已经弃用的部分，原始代码参见<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007215988">这里</a>）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">!(<span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">n</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    c(</span><br><span class="line">      <span class="string">&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#x27;&#x27;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;</span></span><br><span class="line">    ),</span><br><span class="line">      o(),</span><br><span class="line">      r();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">0</span>; e &lt; d.length; e++)</span><br><span class="line">      d[e].alpha &lt;= <span class="number">0</span></span><br><span class="line">        ? (t.body.removeChild(d[e].el), d.splice(e, <span class="number">1</span>))</span><br><span class="line">        : (d[e].y--,</span><br><span class="line">          (d[e].scale += <span class="number">0.004</span>),</span><br><span class="line">          (d[e].alpha -= <span class="number">0.013</span>),</span><br><span class="line">          (d[e].el.style.cssText =</span><br><span class="line">            <span class="string">&quot;left:&quot;</span> +</span><br><span class="line">            d[e].x +</span><br><span class="line">            <span class="string">&quot;px;top:&quot;</span> +</span><br><span class="line">            d[e].y +</span><br><span class="line">            <span class="string">&quot;px;opacity:&quot;</span> +</span><br><span class="line">            d[e].alpha +</span><br><span class="line">            <span class="string">&quot;;transform:scale(&quot;</span> +</span><br><span class="line">            d[e].scale +</span><br><span class="line">            <span class="string">&quot;,&quot;</span> +</span><br><span class="line">            d[e].scale +</span><br><span class="line">            <span class="string">&quot;) rotate(45deg);background:&quot;</span> +</span><br><span class="line">            d[e].color +</span><br><span class="line">            <span class="string">&quot;;z-index:99999&quot;</span>));</span><br><span class="line">    requestAnimationFrame(r);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">o</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> t = <span class="string">&quot;function&quot;</span> == <span class="keyword">typeof</span> e.onclick &amp;&amp; e.onclick;</span><br><span class="line">    e.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      t &amp;&amp; t(), i(e);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">i</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = t.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    (a.className = <span class="string">&quot;heart&quot;</span>),</span><br><span class="line">      d.push(&#123;</span><br><span class="line">        <span class="attr">el</span>: a,</span><br><span class="line">        <span class="attr">x</span>: e.clientX - <span class="number">5</span>,</span><br><span class="line">        <span class="attr">y</span>: e.clientY - <span class="number">5</span>,</span><br><span class="line">        <span class="attr">scale</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">alpha</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">color</span>: s(),</span><br><span class="line">      &#125;),</span><br><span class="line">      t.body.appendChild(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = t.createElement(<span class="string">&quot;style&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      a.appendChild(t.createTextNode(e));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (t) &#123;</span><br><span class="line">      a.styleSheet.cssText = e;</span><br><span class="line">    &#125;</span><br><span class="line">    t.getElementsByTagName(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].appendChild(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">s</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">&quot;rgb(&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) +</span><br><span class="line">      <span class="string">&quot;,&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) +</span><br><span class="line">      <span class="string">&quot;,&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="built_in">Math</span>.random()) +</span><br><span class="line">      <span class="string">&quot;)&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> d = [];</span><br><span class="line">  (e.requestAnimationFrame = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      e.requestAnimationFrame ||</span><br><span class="line">      e.webkitRequestAnimationFrame ||</span><br><span class="line">      e.mozRequestAnimationFrame ||</span><br><span class="line">      e.oRequestAnimationFrame ||</span><br><span class="line">      e.msRequestAnimationFrame ||</span><br><span class="line">      <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(e, <span class="number">1e3</span> / <span class="number">60</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;)()),</span><br><span class="line">    n();</span><br><span class="line">&#125;)(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">!(<span class="keyword">function</span> (<span class="params">e, t, a</span>) &#123;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">n</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">c</span>(</span><br><span class="line">      <span class="string">&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#x27;&#x27;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;</span></span><br><span class="line">    ),</span><br><span class="line">      <span class="title function_">o</span>(),</span><br><span class="line">      <span class="title function_">r</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">r</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">0</span>; e &lt; d.<span class="property">length</span>; e++)</span><br><span class="line">      d[e].<span class="property">alpha</span> &lt;= <span class="number">0</span></span><br><span class="line">        ? (t.<span class="property">body</span>.<span class="title function_">removeChild</span>(d[e].<span class="property">el</span>), d.<span class="title function_">splice</span>(e, <span class="number">1</span>))</span><br><span class="line">        : (d[e].<span class="property">y</span>--,</span><br><span class="line">          (d[e].<span class="property">scale</span> += <span class="number">0.004</span>),</span><br><span class="line">          (d[e].<span class="property">alpha</span> -= <span class="number">0.013</span>),</span><br><span class="line">          (d[e].<span class="property">el</span>.<span class="property">style</span>.<span class="property">cssText</span> =</span><br><span class="line">            <span class="string">&quot;left:&quot;</span> +</span><br><span class="line">            d[e].<span class="property">x</span> +</span><br><span class="line">            <span class="string">&quot;px;top:&quot;</span> +</span><br><span class="line">            d[e].<span class="property">y</span> +</span><br><span class="line">            <span class="string">&quot;px;opacity:&quot;</span> +</span><br><span class="line">            d[e].<span class="property">alpha</span> +</span><br><span class="line">            <span class="string">&quot;;transform:scale(&quot;</span> +</span><br><span class="line">            d[e].<span class="property">scale</span> +</span><br><span class="line">            <span class="string">&quot;,&quot;</span> +</span><br><span class="line">            d[e].<span class="property">scale</span> +</span><br><span class="line">            <span class="string">&quot;) rotate(45deg);background:&quot;</span> +</span><br><span class="line">            d[e].<span class="property">color</span> +</span><br><span class="line">            <span class="string">&quot;;z-index:99999&quot;</span>));</span><br><span class="line">    <span class="title function_">requestAnimationFrame</span>(r);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">o</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> t = <span class="string">&quot;function&quot;</span> == <span class="keyword">typeof</span> e.<span class="property">onclick</span> &amp;&amp; e.<span class="property">onclick</span>;</span><br><span class="line">    e.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">      t &amp;&amp; <span class="title function_">t</span>(), <span class="title function_">i</span>(e);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">i</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> a = t.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    (a.<span class="property">className</span> = <span class="string">&quot;heart&quot;</span>),</span><br><span class="line">      d.<span class="title function_">push</span>(&#123;</span><br><span class="line">        <span class="attr">el</span>: a,</span><br><span class="line">        <span class="attr">x</span>: e.<span class="property">clientX</span> - <span class="number">5</span>,</span><br><span class="line">        <span class="attr">y</span>: e.<span class="property">clientY</span> - <span class="number">5</span>,</span><br><span class="line">        <span class="attr">scale</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">alpha</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">color</span>: <span class="title function_">s</span>(),</span><br><span class="line">      &#125;),</span><br><span class="line">      t.<span class="property">body</span>.<span class="title function_">appendChild</span>(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> a = t.<span class="title function_">createElement</span>(<span class="string">&quot;style&quot;</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      a.<span class="title function_">appendChild</span>(t.<span class="title function_">createTextNode</span>(e));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (t) &#123;</span><br><span class="line">      a.<span class="property">styleSheet</span>.<span class="property">cssText</span> = e;</span><br><span class="line">    &#125;</span><br><span class="line">    t.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">s</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">&quot;rgb(&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) +</span><br><span class="line">      <span class="string">&quot;,&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) +</span><br><span class="line">      <span class="string">&quot;,&quot;</span> +</span><br><span class="line">      ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) +</span><br><span class="line">      <span class="string">&quot;)&quot;</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> d = [];</span><br><span class="line">  (e.<span class="property">requestAnimationFrame</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      e.<span class="property">requestAnimationFrame</span> ||</span><br><span class="line">      e.<span class="property">webkitRequestAnimationFrame</span> ||</span><br><span class="line">      e.<span class="property">mozRequestAnimationFrame</span> ||</span><br><span class="line">      e.<span class="property">oRequestAnimationFrame</span> ||</span><br><span class="line">      e.<span class="property">msRequestAnimationFrame</span> ||</span><br><span class="line">      <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(e, <span class="number">1e3</span> / <span class="number">60</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;)()),</span><br><span class="line">    <span class="title function_">n</span>();</span><br><span class="line">&#125;)(<span class="variable language_">window</span>, <span class="variable language_">document</span>);</span><br></pre></td></tr></table></figure>
 <p>在主题目录下的 <code>\layout\layout.ejs</code> 文件末尾 <code>&lt;!-- SCRIPTS --&gt;</code> 一段中添加以下代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/js/love.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="插入网易云音乐"><a href="#插入网易云音乐" class="headerlink" title="插入网易云音乐"></a>插入网易云音乐</h3><p>在网易云音乐的网页版上选择一首音乐（不能是 VIP 音乐），点进页面 <code>https://music.163.com/#/song?id=(music_id)</code> 后选择“生成外链播放器”，“自动播放”一栏自选，再复制 HTML 代码：</p>
@@ -2588,7 +2606,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>修改配置 <code>_config.yml</code>：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> <span class="comment"># https://github.com/(user_name)/(user_name).github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">(branch_name)</span> <span class="comment"># default is &quot;main&quot;</span></span><br></pre></td></tr></table></figure>
 <p>调试：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo s --debug</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo s --debug</span><br></pre></td></tr></table></figure>
 <p>部署：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo deploy</span><br></pre></td></tr></table></figure>
 <p>查看 <code>(user_name).github.io</code> 和 <code>blog.example.top</code> 上的网页是否部署成功</p>
@@ -2619,7 +2637,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     &= \frac{A}{2}\cdot\left(\frac{Dp_x - Bp_\theta}{AD - BC}\right)^2 + \frac{D}{2}\cdot\left(\frac{Ap_\theta - Cp_x}{AD - BC}\right)^2 + \frac{B(Dp_x - Bp_\theta)(Ap_\theta - Cp_x)}{(AD - BC)^2} + mg(ax^2 - l\cos\theta) \\
     &= \frac{Dp_x^2 + Ap_\theta^2 - (B+C)p_x p_\theta}{2(AD - BC)} \\
     &= \frac{[p_\theta,\ p_x]\begin{bmatrix}A & B \\ C & D\end{bmatrix}\begin{bmatrix}p_\theta \\ p_x\end{bmatrix}}{2\begin{vmatrix}A & B \\ C & D\end{vmatrix}} + mg(ax^2 - l\cos\theta)
-\end{align*}</script><h3 id="Code-Test"><a href="#Code-Test" class="headerlink" title="Code Test"></a>Code Test</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span>(<span class="params">n</span>):</span></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; n:</span><br><span class="line">        <span class="built_in">print</span>(a, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">fib(<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+\end{align*}</script><h3 id="Code-Test"><a href="#Code-Test" class="headerlink" title="Code Test"></a>Code Test</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>):</span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &lt; n:</span><br><span class="line">        <span class="built_in">print</span>(a, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">fib(<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f (from_encoding) -t (to_encoding) (from_file_name) -o (to_file_name)</span><br></pre></td></tr></table></figure>
 <h3 id="Picture-Test"><a href="#Picture-Test" class="headerlink" title="Picture Test"></a>Picture Test</h3><p>格式：<code>![](../images/(your_picture.jpg)</code>，图片默认放在博客目录的 <code>/source/images/</code> 下</p>
 <p><img src="../images/hello_world_reimu.jpg" class="lazyload" data-srcset="../images/hello_world_reimu.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></p>
@@ -2649,10 +2667,10 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-02-17T00:30:03+08:00">
-  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-02-26T14:44:23+08:00">
+  <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年2月17日</p>
+    <p>更新于：2022年2月26日</p>
   </a>
 </div>
 
@@ -2679,7 +2697,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -2691,7 +2709,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -2703,7 +2721,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -2733,7 +2751,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     <div class="prev-next">
       
         <a class='prev' href='/Manjaro-KDE-Installation/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Manjaro KDE 安装指南</p>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Manjaro KDE 安装指南</p>
           <p class='content'>在 ThinkPad X13 2021 Intel/Surface Pro 6 上安装 Manjaro 21 KDE Plasma + Windows 11 双系统的指南ThinkPad 系统信...</p>
         </a>
       
@@ -2885,7 +2903,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
   </footer>
 
 
-        <a id="s-top" class="fas fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
       </div>
     </div>
     <div>
@@ -2904,7 +2922,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 <script>
   
-  volantis.css("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css");
+  volantis.css("https://npm.elemecdn.com/@fortawesome/fontawesome-free@5.14/css/all.min.css");
   
   
   
@@ -2915,150 +2933,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 <!-- internal -->
 
-
-  <script>
-  volantis.message = (title, message, option = {}, done = null) => {
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769556')
-      volantis.js('/js/message.js?time=1645029769556', () => {
-        tozashMessage(title, message, option, done);
-      });
-    } else {
-      tozashMessage(title, message, option, done);
-    }
-
-    function tozashMessage(title, message, option, done) {
-      const {
-        icon,
-        time,
-        position,
-        transitionIn,
-        transitionOut,
-        messageColor,
-        titleColor,
-        backgroundColor,
-        zindex,
-        displayMode
-      } = option;
-      iziToast.show({
-        layout: '2',
-        icon: 'Fontawesome',
-        closeOnEscape: 'true',
-        displayMode: displayMode || 'replace',
-        transitionIn: transitionIn || 'bounceInLeft',
-        transitionOut: transitionOut || 'fadeOutRight',
-        messageColor: messageColor || 'var(--color-text)',
-        titleColor: titleColor || 'var(--color-text)',
-        backgroundColor: backgroundColor || 'var(--color-card)',
-        zindex: zindex || '2147483647',
-        icon: icon || 'fas fa-info-circle light-blue',
-        timeout: time || '5000',
-        position: position || 'topRight',
-        title: title,
-        message: message,
-        onClosed: () => {
-          if(done) done();
-        },
-      });
-    }
-  };
-
-  volantis.question = (title, message, option = {}, success = null, cancel = null, done = null) => {
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769556')
-      volantis.js('/js/message.js?time=1645029769556', () => {
-        tozashQuestion(title, message, option, success, cancel, done);
-      });
-    } else {
-      tozashQuestion(title, message, option, success, cancel, done);
-    }
-
-    function tozashQuestion(title, message, option, success, cancel, done) {
-      const {
-        icon,
-        time,
-        position,
-        transitionIn,
-        transitionOut,
-        messageColor,
-        titleColor,
-        backgroundColor,
-        zindex
-      } = option;
-      iziToast.question({ 
-        id: 'question',
-        icon: 'Fontawesome',
-        close: false,
-        overlay: true,
-        displayMode: 'once',
-        position: 'center',
-        messageColor: messageColor || 'var(--color-text)',
-        titleColor: titleColor || 'var(--color-text)',
-        backgroundColor: backgroundColor || 'var(--color-card)',
-        zindex: zindex || '2147483647',
-        icon: icon || 'fas fa-question-circle light-blue',
-        timeout: time || '20000',
-        title: title,
-        message: message,
-        buttons: [
-          ['<button><b>是</b></button>', (instance, toast) => {
-            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
-            if(success) success(instance, toast)
-          }],
-          ['<button><b>否</b></button>', (instance, toast) => {
-            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
-            if(cancel) cancel(instance, toast)
-          }]
-        ],
-        onClosed: (instance, toast, closedBy) => {
-          if(done) done(instance, toast, closedBy);
-        }
-      });
-    }
-  }
-
-  volantis.hideMessage = (done = null) => {
-    const toast = document.querySelector('.iziToast');
-    if (!toast) {
-      if(done) done()
-      return;
-    }
-    
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769556')
-      volantis.js('/js/message.js?time=1645029769556', () => {
-        hideMessage(done);
-      });
-    } else {
-      hideMessage(done);
-    }
-
-    function hideMessage(done) {
-      iziToast.hide({}, toast);
-      if(done) done();
-    }
-  }
-
-  volantis.messageCopyright = {
-    enable: 'true' === 'true' ? true : false,
-    title: '知识共享许可协议',
-    message: '请遵守 CC BY-NC-SA 4.0 协议。',
-    icon: 'far fa-copyright light-blue'
-  }
-
-  volantis.messageRightMenu = {
-    enable: 'true' === 'true' ? true : false,
-  }
-
-  if(volantis.messageCopyright.enable) {
-    document.body.oncopy = function(){
-      volantis.message(volantis.messageCopyright.title, volantis.messageCopyright.message, {
-        icon: volantis.messageCopyright.icon
-      });
-    }; 
-  }
-</script>
-
+<script src="/js/app.js?time=1648099524278.js"></script>
 
 
 
@@ -3090,6 +2965,12 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
           
           <i class='fa fa-cut fa-fw mR12'></i> 剪切文本
         </span>
+        
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='searchWord'>
+          
+          <i class='fa fa-search fa-fw'></i> 站内搜索
+        </span>
+        
         <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='openTab'>
           
           <i class='fa fa-external-link-square-alt fa-fw mR12'></i> 在新标签页打开
@@ -3228,24 +3109,23 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
         
       
         
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+        
+      >
+         
+      </a>
+    </li>
+  
+        
       
     </ul>
   </div>
-  <script>
-    volantis.rightMenu = {};
-    volantis.rightMenu.faicon = 'fa' || 'fa';
-    
-    
-      volantis.rightMenu.defaultStyles = true;
-    
-    
-    
-    
-    
-      volantis.APlayerController = {};
-    
-    volantis.js('/js/rightMenu.js?time=1645029769556')
-  </script>
+  <script>volantis.js('/js/plugins/rightMenu.js?time=1648099524278')</script>
 
 
 
@@ -3258,19 +3138,19 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     
       const sites_api = document.getElementById('sites-api');
       if (sites_api != undefined && typeof SitesJS === 'undefined') {
-        volantis.js("/js/plugins/sites.js?time=1645029769556")
+        volantis.js("/js/plugins/sites.js?time=1648099524278")
       }
     
     
       const friends_api = document.getElementById('friends-api');
       if (friends_api != undefined && typeof FriendsJS === 'undefined') {
-        volantis.js("/js/plugins/friends.js?time=1645029769556")
+        volantis.js("/js/plugins/friends.js?time=1648099524278")
       }
     
     
       const contributors_api = document.getElementById('contributors-api');
       if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
-        volantis.js("/js/plugins/contributors.js?time=1645029769556")
+        volantis.js("/js/plugins/contributors.js?time=1648099524278")
       }
     
   };
@@ -3284,7 +3164,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 
 
-  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+  <script defer src="https://npm.elemecdn.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
 <script>
   // https://www.npmjs.com/package/vanilla-lazyload
   // Set the options globally
@@ -3336,10 +3216,6 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 
 
-
-<script src="/js/app.js?time=1645029769556.js"></script>
-
-
 <!-- optional -->
 
   <script>
@@ -3350,13 +3226,17 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
   function loadSearchScript() {
     // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
-    return volantis.js("/js/search/hexo.js?time=1645029769556");
+    return volantis.js("/js/search/hexo.js?time=1648099524278");
   }
 
   function loadSearchService() {
     loadSearchScript();
     document.querySelectorAll(".input.u-search-input").forEach((e) => {
       e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event)=>{event.preventDefault();}, false);
     });
   }
 
@@ -3398,7 +3278,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
       document.querySelector(".article pre code"))) {
       return;
     }
-    VolantisApp.copyCode(".highlight .code pre, .article pre code")
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
   }
   volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
   volantis.pjax.push(pjax_highlightjs_copyCode)
@@ -3413,6 +3293,46 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 
 
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("/libs/swiper/swiper-bundle.min.css");
+    volantis.js("/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
 
 
 <!-- pjax 标签必须存在于所有页面 否则 pjax error -->
@@ -3458,7 +3378,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     };
     (function () {
       var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.src = "/libs/mathjax/es5/tex-mml-chtml.js";
       script.defer = true;
       document.head.appendChild(script);
     })();
@@ -3491,7 +3411,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
       link.addEventListener("click", (event) => {
         event.preventDefault();
         // 这里的 addTop 是通过错位使得 toc 自动展开.
-        volantis.scroll.to(target,{addTop: 5, observer:true})
+        volantis.scroll.to(target,{addTop: 5, observer:false})
         // Anchor id
         history.pushState(null, document.title, "#" + target.id);
       });
@@ -3651,7 +3571,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Firestar 的幻想乡","url":"https://blog.firestar-reimu.top/","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Firestar","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"https://blog.firestar-reimu.top/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://blog.firestar-reimu.top/","name":"Firestar 的幻想乡"}},{"@type":"ListItem","position":2,"item":{"@id":"https://blog.firestar-reimu.top/categories/教程/","name":"教程"}},{"@type":"ListItem","position":3,"item":{"@id":"https://blog.firestar-reimu.top/Hello-World/","name":"Hello World"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Hello World","description":"","datePublished":"2021-09-06T04:00:00.000Z","dateModified":"2022-02-16T16:30:03.380Z","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.firestar-reimu.top/Hello-World/"},"author":{"@type":"Person","name":"Firestar","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"https://blog.firestar-reimu.top/"},"publisher":{"@type":"Organization","name":"Firestar 的幻想乡","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://blog.firestar-reimu.top/Hello-World/","wordCount":0,"articleSection":"教程","keywords":"Hello World,Blog","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Firestar 的幻想乡","url":"https://blog.firestar-reimu.top/","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Firestar","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"https://blog.firestar-reimu.top/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://blog.firestar-reimu.top/","name":"Firestar 的幻想乡"}},{"@type":"ListItem","position":2,"item":{"@id":"https://blog.firestar-reimu.top/categories/教程/","name":"教程"}},{"@type":"ListItem","position":3,"item":{"@id":"https://blog.firestar-reimu.top/Hello-World/","name":"Hello World"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Hello World","description":"","datePublished":"2021-09-06T04:00:00.000Z","dateModified":"2022-02-26T06:44:23.814Z","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.firestar-reimu.top/Hello-World/"},"author":{"@type":"Person","name":"Firestar","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png"},"url":"https://blog.firestar-reimu.top/"},"publisher":{"@type":"Organization","name":"Firestar 的幻想乡","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://blog.firestar-reimu.top/Hello-World/","wordCount":0,"articleSection":"教程","keywords":"Hello World,Blog","image":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 <!-- more -->
@@ -3669,7 +3589,7 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+<script src="/libs/pjax/pjax.min.js"></script>
 
 
 <script>
@@ -3679,6 +3599,9 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
         elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
         selectors: [
           "head title",
+          "head meta[name='description']",
+          "head meta[name='keywords']",
+          "head meta[property^='og']",
           
           "#l_main",
           "#pjax-header-nav-list",
@@ -3687,7 +3610,8 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
           "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
         ],
         cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
+        timeout: 5000,
+        
       });
     });
 
@@ -3717,9 +3641,14 @@ I_r = \frac{1}{2\pi}\oint p_r \,\mathrm{d}r = \frac{1}{2\pi}\int_0^{2\pi} p_r \f
     });
 
     document.addEventListener('pjax:error', function (e) {
-      // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
-      volantis.pjax.method.error.start();
-      window.location.href = e.triggerElement.href;
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
     });
 </script>
 

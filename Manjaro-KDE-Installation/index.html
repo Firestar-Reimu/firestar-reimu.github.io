@@ -7,9 +7,9 @@
   
   <link rel="canonical" href="https://blog.firestar-reimu.top/manjaro-kde-installation/"/>
   <!-- 渲染优化 -->
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <!-- <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin> -->
   <meta name="renderer" content="webkit">
   <meta name="force-rendering" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -20,8 +20,9 @@
   <meta content="Firestar 的幻想乡" name="apple-mobile-web-app-title">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
-  <link rel="preload" href="/css/style.css?time=1645029769553" as="style">
+  <link rel="preload" href="/css/style.css?time=1648099524275" as="style">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- 页面元数据 -->
   <title>Manjaro KDE 安装指南 - Firestar 的幻想乡</title>
@@ -824,7 +825,7 @@ button {
 }
 @font-face {
   font-family: 'Noto Sans';
-  src: url("");
+  src: url("/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1660,8 +1661,8 @@ ul.list-v >li>a:hover {
 }
 
   </style>
-  <link rel="stylesheet" href="/css/style.css?time=1645029769553" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.css?time=1645029769553"></noscript>
+  <link rel="stylesheet" href="/css/style.css?time=1648099524275" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css?time=1648099524275"></noscript>
   
 <script>
 if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
@@ -1728,7 +1729,44 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <script>
   /************这个文件存放不需要重载的全局变量和全局函数*********/
   window.volantis = {}; // volantis 全局变量
+  volantis.debug = false; // 开启调试模式
   volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
+
+  volantis.GLOBAL_CONFIG ={
+    cdn: {"js":{"app":"/js/app.js?time=1648099524275","sites":"/js/plugins/sites.js?time=1648099524275","friends":"/js/plugins/friends.js?time=1648099524275","parallax":"/js/plugins/parallax.js?time=1648099524275","rightMenu":"/js/plugins/rightMenu.js?time=1648099524275","contributors":"/js/plugins/contributors.js?time=1648099524275","message":"/js/thirdparty/message.js?time=1648099524275","valine":"https://npm.elemecdn.com/valine@1.4/dist/Valine.min.js?time=1648099524275","search":"/js/search/hexo.js?time=1648099524275"},"css":{"style":"/css/style.css?time=1648099524275","message":"/css/message.css?time=1648099524275"}},
+    default: {"avatar":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/avatar/round/3442075.svg","link":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg","cover":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/cover/76b86c0226ffd.svg","image":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg"},
+    lastupdate: new Date('Thu Mar 24 2022 13:25:24 GMT+0800 (China Standard Time)'),
+    sidebar: {
+      for_page: ["blogger","category","tagcloud","donate"],
+      for_post: ["toc"],
+      webinfo: {
+        lastupd: {
+          enable: true,
+          friendlyShow: true
+        },
+        runtime: {
+          data: "2020/01/01",
+          unit: "天"
+        }
+      }
+    },
+    plugins: {
+      message: {"enable":true,"icon":{"default":"fas fa-info-circle light-blue","quection":"fas fa-question-circle light-blue"},"time":{"default":5000,"quection":20000},"position":"topRight","transitionIn":"bounceInLeft","transitionOut":"fadeOutRight","titleColor":"var(--color-text)","messageColor":"var(--color-text)","backgroundColor":"var(--color-card)","zindex":2147483647,"copyright":{"enable":true,"title":"知识共享许可协议","message":"请遵守 CC BY-NC-SA 4.0 协议。","icon":"far fa-copyright light-blue"},"aplayer":{"enable":true,"play":"fas fa-play","pause":"fas fa-pause"},"rightmenu":{"enable":true,"notice":true}},
+      fancybox: {"css":"/libs/@fancyapps/ui/dist/fancybox.css","js":"/libs/@fancyapps/ui/dist/fancybox.umd.js"},
+      aplayer: {
+        id: 3175833810,
+        enable:null
+      },
+      rightmenu: {
+        faicon: "fa",
+        layout: ["home","hr","help","examples","contributors","hr","source_docs","source_theme","hr","print","darkmode","reading","music"],
+        music_alwaysShow: true,
+        customPicUrl: {"enable":false,"old":null,"new":null},
+        print: true
+      }
+    }
+  }
+
   /******************** volantis.EventListener ********************************/
   // 事件监听器 see: /source/js/app.js
   volantis.EventListener = {}
@@ -1890,8 +1928,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     push: volantis.dark.method.toggle.push,
   };
   /********************  Message  ********************************/
-  // /layout/_plugins/message/script.ejs
-  // volantis.message
+  // VolantisApp.message
   /********************  isMobile  ********************************/
   // /source/js/app.js
   // volantis.isMobile
@@ -1956,7 +1993,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   volantis.import = {
     jQuery: () => {
       if (typeof jQuery == "undefined") {
-        return volantis.js("https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js")
+        return volantis.js("https://npm.elemecdn.com/jquery@3.5/dist/jquery.min.js")
       } else {
         return new Promise(resolve => {
           resolve()
@@ -2088,9 +2125,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='nav-sub'>
       <p class="title"></p>
       <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
+        <li><a id="s-comment" class="fa-solid fa-comments fa-fw" target="_self"  href="/" onclick="return false;" title="comment"></a></li>
         
-          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
+          <li><a id="s-toc" class="s-toc fa-solid fa-list fa-fw" target="_self"  href="/" onclick="return false;" title="toc"></a></li>
         
       </ul>
     </div>
@@ -2099,7 +2136,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png' alt="This is a picture without description" />
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
           
@@ -2215,20 +2252,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 				</ul>
 			</div>
-
+      
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
-          <i class="icon fas fa-search fa-fw"></i>
+          <i class="icon fa-solid fa-search fa-fw"></i>
           <input type="text" class="input u-search-input" placeholder="Search..." />
         </form>
       </div>
+      
 
 			<ul class='switcher nav-list-h m-phone'>
 				
-					<li><a class="s-search fas fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
+					<li><a class="s-search fa-solid fa-search fa-fw" target="_self" href="/" onclick="return false;" title="search"></a></li>
 				
 				<li>
-          <a class="s-menu fas fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
+          <a class="s-menu fa-solid fa-bars fa-fw" target="_self" href="/" onclick="return false;" title="menu"></a>
           <ul class="menu-phone list-v navigation white-box">
             
               
@@ -2371,42 +2409,42 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
               
               active-action="action-v4getting-started">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg' alt="This is a picture without description" ><p>文档</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
             </a>
           
             <a href="/faqs/"
               
               
               active-action="action-faqs">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg' alt="This is a picture without description" ><p>帮助</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
             </a>
           
             <a href="/examples/"
               
               
               active-action="action-examples">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg' alt="This is a picture without description" ><p>示例</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
             </a>
           
             <a href="/contributors/"
               
               
               active-action="action-contributors">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg' alt="This is a picture without description" ><p>社区</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
             </a>
           
             <a href="/archives/"
               
               
               active-action="action-archives">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg' alt="This is a picture without description" ><p>博客</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
             </a>
           
             <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
               
               
               active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg' alt="This is a picture without description" ><p>源码</p>
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg'><p>源码</p>
             </a>
           
         
@@ -2430,6 +2468,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Firestar 的幻想乡">
   </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="Firestar 的幻想乡">
+    <meta itemprop="description" content="">
+  </span>
   
 
 
@@ -2451,7 +2493,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
   <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="/images/favicon.ico" class="lazyload" data-srcset="/images/favicon.ico" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+    <img itemprop="image" src="/images/favicon.ico" class="lazyload" data-srcset="/images/favicon.ico" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
     <p itemprop="name">Firestar</p>
   </a>
 </div>
@@ -2475,7 +2517,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
             <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2021-09-13T12:00:00+08:00">
-  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+  <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
     <p>发布于：2021年9月13日</p>
   </a>
@@ -2842,7 +2884,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>该方法适合对文本文件转换编码，对 ZIP 压缩包和 PDF 文件等二进制文件则无法使用</p>
 <p><code>iconv</code> 支持的编码格式可以用 <code>iconv -l</code> 查看</p>
 <h3 id="转换图片格式"><a href="#转换图片格式" class="headerlink" title="转换图片格式"></a><strong>转换图片格式</strong></h3><p>批量将图片从 PNG 格式转换为 JPG 格式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -1 *.png | xargs -n 1 bash -c <span class="string">&#x27;convert &quot;$0&quot; &quot;$&#123;0%.png&#125;.jpg&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -1 *.png | xargs -n 1 bash -c <span class="string">&#x27;convert &quot;$0&quot; &quot;$&#123;0%.png&#125;.jpg&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
 <h3 id="grep-查找命令"><a href="#grep-查找命令" class="headerlink" title="grep 查找命令"></a><strong>grep 查找命令</strong></h3><p>grep 命令的用法为在文件或命令输出中查找字符串，例如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep (pattern) (file_pattern)</span><br></pre></td></tr></table></figure>
 <p>即为在当前目录文件名符合 <code>file_pattern</code> 的文件中查找字符串 <code>pattern</code></p>
@@ -2936,7 +2978,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>删除多余启动条目，需要修改<code>/boot/grub/grub.cfg</code></p>
 <p>删除整一段 <code>submenu &#39;Advanced options for Manjaro Linux&#39;</code>，删除整一段 <code>UEFI Firmware Settings</code>，并将 <code>Windows Boot Manager (on /dev/nvme0n1p1)</code> 改为 <code>Windows</code></p>
 <p>恢复默认的<code>/boot/grub/grub.cfg</code>需要输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> GRUB_DISABLE_OS_PROBER=<span class="literal">false</span> | sudo tee -a /etc/default/grub &amp;&amp; sudo update-grub</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> GRUB_DISABLE_OS_PROBER=<span class="literal">false</span> | sudo <span class="built_in">tee</span> -a /etc/default/grub &amp;&amp; sudo update-grub</span><br></pre></td></tr></table></figure>
 <h3 id="pacman-添加吃豆人彩蛋"><a href="#pacman-添加吃豆人彩蛋" class="headerlink" title="pacman 添加吃豆人彩蛋"></a><strong>pacman 添加吃豆人彩蛋</strong></h3><p>编辑 <code>/etc/pacman.conf</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
 <p>去掉 <code>Color</code> 前面的注释，并在下一行加入：</p>
@@ -2958,12 +3000,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <h3 id="运行-AppImage-文件或二进制文件"><a href="#运行-AppImage-文件或二进制文件" class="headerlink" title="运行 AppImage 文件或二进制文件"></a><strong>运行 AppImage 文件或二进制文件</strong></h3><p>AppImage 的扩展名为 <code>.AppImage</code>，二进制文件没有扩展名，这两者一般可以直接双击或在终端输入文件名运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(file_name)</span><br></pre></td></tr></table></figure>
 <p>如果无法启动，则需要添加运行权限：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x (file_name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x (file_name)</span><br></pre></td></tr></table></figure>
 <p>然后双击或在终端输入文件名运行即可</p>
 <h3 id="字体安装"><a href="#字体安装" class="headerlink" title="字体安装"></a><strong>字体安装</strong></h3><p>Manjaro KDE 支持直接在 Dolphin 的右键菜单中安装 TTF 和 OTF 字体，但不支持 TTC 字体集，TTC 字体集可以在系统字体安装的默认文件夹 <code>/usr/share/fonts</code> 中用命令 <code>fc-cache -fv</code> 安装</p>
 <p><strong>注意不管是 Windows 还是 Manjaro Linux 都要将字体“为所有用户安装”，尤其是 Windows 11 右键直接安装是安装到个人用户目录 <code>C:\Users\user_name\AppData\Local\Microsoft\Windows\Fonts</code> 而非系统目录 <code>C:\Windows\Fonts</code></strong></p>
 <h3 id="安装微软系统字体"><a href="#安装微软系统字体" class="headerlink" title="安装微软系统字体"></a><strong>安装微软系统字体</strong></h3><p>微软系统字体文件夹在 <code>C:\Windows\Fonts</code>，安装方法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /usr/share/fonts/winfonts</span><br><span class="line">sudo cp (win-font-path)/* /usr/share/fonts/winfonts/</span><br><span class="line"><span class="built_in">cd</span> /usr/share/fonts/winfonts/</span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /usr/share/fonts/winfonts</span><br><span class="line">sudo <span class="built_in">cp</span> (win-font-path)/* /usr/share/fonts/winfonts/</span><br><span class="line"><span class="built_in">cd</span> /usr/share/fonts/winfonts/</span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure>
 <p>这样就可以安装微软雅黑、宋体、黑体等字体了</p>
 <p><strong>注意需要排除掉 MS Gothic、Yu Gothic 和 Malgun Gothic 字体，因它们只有部分日/韩文汉字字形（与中文汉字字形一样的会被排除，最后导致部分中文汉字显示为日/韩文字形）</strong></p>
 <h3 id="安装-Google-Noto-字体"><a href="#安装-Google-Noto-字体" class="headerlink" title="安装 Google Noto 字体"></a><strong>安装 Google Noto 字体</strong></h3><p>命令行安装：</p>
@@ -2978,7 +3020,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>解决方法是手动修改字体设置文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fonts/conf.d/64-language-selector-prefer.conf</span><br></pre></td></tr></table></figure>
 <p>并加入以下内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">fontconfig</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;fonts.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">fontconfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>sans-serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>monospace<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fontconfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">fontconfig</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;fonts.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">fontconfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>sans-serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Serif CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>monospace<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK SC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK TC<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK HK<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK JP<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Noto Sans Mono CJK KR<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fontconfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>保存退出即可</p>
 <p><strong>另一种处理方法是只安装简体中文字体，比如 Noto Sans SC（注意没有 CJK）</strong></p>
 <h3 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a><strong>安装中文输入法</strong></h3><p>推荐使用 Fcitx5:</p>
@@ -3073,7 +3115,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           <div class="new-meta-item date" itemprop="dateModified" datetime="2022-01-20T21:33:21+08:00">
-  <a class='notlink' href="/" onclick="return false;" title="Click me!" >
+  <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年1月20日</p>
   </a>
@@ -3102,7 +3144,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -3114,7 +3156,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -3126,7 +3168,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="This is a picture without description" >
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
           
         </a>
       
@@ -3155,12 +3197,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/tools/Time-Calculator/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>时间计算器</p>
+          <p class='content'>
+
+
+
+    
+        UTC
+        UTC+1
+        UTC+2
+        UTC+3
+        UTC+4
+        UTC+5
+      ...</p>
+        </a>
+      
       
         <a class='next' href='/Hello-World/'>
-          <p class='title'>Hello World<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'> 
+          <p class='title'>Hello World<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
 
-申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码...</p>
+申请 GitHub Pages新建一个 repository，命名为 (user_name).github.io，隐私设置为 Public，再建一个 GitHub 仓库用来存放博客的源代码（...</p>
         </a>
       
     </div>
@@ -3310,7 +3368,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   </footer>
 
 
-        <a id="s-top" class="fas fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
+        <a id="s-top" class="fa-solid fa-arrow-up fa-fw" href="/" onclick="return false;" title="top"></a>
       </div>
     </div>
     <div>
@@ -3329,7 +3387,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   
-  volantis.css("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css");
+  volantis.css("https://npm.elemecdn.com/@fortawesome/fontawesome-free@5.14/css/all.min.css");
   
   
   
@@ -3340,150 +3398,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <!-- internal -->
 
-
-  <script>
-  volantis.message = (title, message, option = {}, done = null) => {
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769553')
-      volantis.js('/js/message.js?time=1645029769553', () => {
-        tozashMessage(title, message, option, done);
-      });
-    } else {
-      tozashMessage(title, message, option, done);
-    }
-
-    function tozashMessage(title, message, option, done) {
-      const {
-        icon,
-        time,
-        position,
-        transitionIn,
-        transitionOut,
-        messageColor,
-        titleColor,
-        backgroundColor,
-        zindex,
-        displayMode
-      } = option;
-      iziToast.show({
-        layout: '2',
-        icon: 'Fontawesome',
-        closeOnEscape: 'true',
-        displayMode: displayMode || 'replace',
-        transitionIn: transitionIn || 'bounceInLeft',
-        transitionOut: transitionOut || 'fadeOutRight',
-        messageColor: messageColor || 'var(--color-text)',
-        titleColor: titleColor || 'var(--color-text)',
-        backgroundColor: backgroundColor || 'var(--color-card)',
-        zindex: zindex || '2147483647',
-        icon: icon || 'fas fa-info-circle light-blue',
-        timeout: time || '5000',
-        position: position || 'topRight',
-        title: title,
-        message: message,
-        onClosed: () => {
-          if(done) done();
-        },
-      });
-    }
-  };
-
-  volantis.question = (title, message, option = {}, success = null, cancel = null, done = null) => {
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769553')
-      volantis.js('/js/message.js?time=1645029769553', () => {
-        tozashQuestion(title, message, option, success, cancel, done);
-      });
-    } else {
-      tozashQuestion(title, message, option, success, cancel, done);
-    }
-
-    function tozashQuestion(title, message, option, success, cancel, done) {
-      const {
-        icon,
-        time,
-        position,
-        transitionIn,
-        transitionOut,
-        messageColor,
-        titleColor,
-        backgroundColor,
-        zindex
-      } = option;
-      iziToast.question({ 
-        id: 'question',
-        icon: 'Fontawesome',
-        close: false,
-        overlay: true,
-        displayMode: 'once',
-        position: 'center',
-        messageColor: messageColor || 'var(--color-text)',
-        titleColor: titleColor || 'var(--color-text)',
-        backgroundColor: backgroundColor || 'var(--color-card)',
-        zindex: zindex || '2147483647',
-        icon: icon || 'fas fa-question-circle light-blue',
-        timeout: time || '20000',
-        title: title,
-        message: message,
-        buttons: [
-          ['<button><b>是</b></button>', (instance, toast) => {
-            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
-            if(success) success(instance, toast)
-          }],
-          ['<button><b>否</b></button>', (instance, toast) => {
-            instance.hide({ transitionOut: transitionOut || 'fadeOut' }, toast, 'button');
-            if(cancel) cancel(instance, toast)
-          }]
-        ],
-        onClosed: (instance, toast, closedBy) => {
-          if(done) done(instance, toast, closedBy);
-        }
-      });
-    }
-  }
-
-  volantis.hideMessage = (done = null) => {
-    const toast = document.querySelector('.iziToast');
-    if (!toast) {
-      if(done) done()
-      return;
-    }
-    
-    if (typeof iziToast === "undefined") {
-      volantis.css('/css/message.css?time=1645029769553')
-      volantis.js('/js/message.js?time=1645029769553', () => {
-        hideMessage(done);
-      });
-    } else {
-      hideMessage(done);
-    }
-
-    function hideMessage(done) {
-      iziToast.hide({}, toast);
-      if(done) done();
-    }
-  }
-
-  volantis.messageCopyright = {
-    enable: 'true' === 'true' ? true : false,
-    title: '知识共享许可协议',
-    message: '请遵守 CC BY-NC-SA 4.0 协议。',
-    icon: 'far fa-copyright light-blue'
-  }
-
-  volantis.messageRightMenu = {
-    enable: 'true' === 'true' ? true : false,
-  }
-
-  if(volantis.messageCopyright.enable) {
-    document.body.oncopy = function(){
-      volantis.message(volantis.messageCopyright.title, volantis.messageCopyright.message, {
-        icon: volantis.messageCopyright.icon
-      });
-    }; 
-  }
-</script>
-
+<script src="/js/app.js?time=1648099524275.js"></script>
 
 
 
@@ -3515,6 +3430,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
           <i class='fa fa-cut fa-fw mR12'></i> 剪切文本
         </span>
+        
+        <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='searchWord'>
+          
+          <i class='fa fa-search fa-fw'></i> 站内搜索
+        </span>
+        
         <span class='vlts-menu opt fix-cursor-default menu-Option' data-fn-type='openTab'>
           
           <i class='fa fa-external-link-square-alt fa-fw mR12'></i> 在新标签页打开
@@ -3653,24 +3574,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
       
         
+          
+    <li class="menuLoad-Content">
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+        
+      >
+         
+      </a>
+    </li>
+  
+        
       
     </ul>
   </div>
-  <script>
-    volantis.rightMenu = {};
-    volantis.rightMenu.faicon = 'fa' || 'fa';
-    
-    
-      volantis.rightMenu.defaultStyles = true;
-    
-    
-    
-    
-    
-      volantis.APlayerController = {};
-    
-    volantis.js('/js/rightMenu.js?time=1645029769553')
-  </script>
+  <script>volantis.js('/js/plugins/rightMenu.js?time=1648099524275')</script>
 
 
 
@@ -3683,19 +3603,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       const sites_api = document.getElementById('sites-api');
       if (sites_api != undefined && typeof SitesJS === 'undefined') {
-        volantis.js("/js/plugins/sites.js?time=1645029769553")
+        volantis.js("/js/plugins/sites.js?time=1648099524275")
       }
     
     
       const friends_api = document.getElementById('friends-api');
       if (friends_api != undefined && typeof FriendsJS === 'undefined') {
-        volantis.js("/js/plugins/friends.js?time=1645029769553")
+        volantis.js("/js/plugins/friends.js?time=1648099524275")
       }
     
     
       const contributors_api = document.getElementById('contributors-api');
       if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
-        volantis.js("/js/plugins/contributors.js?time=1645029769553")
+        volantis.js("/js/plugins/contributors.js?time=1648099524275")
       }
     
   };
@@ -3709,7 +3629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+  <script defer src="https://npm.elemecdn.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
 <script>
   // https://www.npmjs.com/package/vanilla-lazyload
   // Set the options globally
@@ -3761,10 +3681,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-
-<script src="/js/app.js?time=1645029769553.js"></script>
-
-
 <!-- optional -->
 
   <script>
@@ -3775,13 +3691,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   function loadSearchScript() {
     // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
-    return volantis.js("/js/search/hexo.js?time=1645029769553");
+    return volantis.js("/js/search/hexo.js?time=1648099524275");
   }
 
   function loadSearchService() {
     loadSearchScript();
     document.querySelectorAll(".input.u-search-input").forEach((e) => {
       e.removeEventListener("focus", loadSearchService, false);
+    });
+
+    document.querySelectorAll(".u-search-form").forEach((e) => {
+      e.addEventListener("submit", (event)=>{event.preventDefault();}, false);
     });
   }
 
@@ -3823,7 +3743,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       document.querySelector(".article pre code"))) {
       return;
     }
-    VolantisApp.copyCode(".highlight .code pre, .article pre code")
+    VolantisApp.utilCopyCode(".highlight .code pre, .article pre code")
   }
   volantis.requestAnimationFrame(pjax_highlightjs_copyCode)
   volantis.pjax.push(pjax_highlightjs_copyCode)
@@ -3838,6 +3758,46 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+
+
+
+  <script>
+  function load_swiper() {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    volantis.css("/libs/swiper/swiper-bundle.min.css");
+    volantis.js("/libs/swiper/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    volantis.swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  volantis.pjax.push(() => {
+    if (!document.querySelectorAll(".swiper-container")[0]) return;
+    if (typeof volantis.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
 
 
 <!-- pjax 标签必须存在于所有页面 否则 pjax error -->
@@ -3862,7 +3822,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       link.addEventListener("click", (event) => {
         event.preventDefault();
         // 这里的 addTop 是通过错位使得 toc 自动展开.
-        volantis.scroll.to(target,{addTop: 5, observer:true})
+        volantis.scroll.to(target,{addTop: 5, observer:false})
         // Anchor id
         history.pushState(null, document.title, "#" + target.id);
       });
@@ -4040,7 +4000,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+<script src="/libs/pjax/pjax.min.js"></script>
 
 
 <script>
@@ -4050,6 +4010,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
         selectors: [
           "head title",
+          "head meta[name='description']",
+          "head meta[name='keywords']",
+          "head meta[property^='og']",
           
           "#l_main",
           "#pjax-header-nav-list",
@@ -4058,7 +4021,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           "script[data-pjax], .pjax-reload script" // script标签添加data-pjax 或 script标签外层添加.pjax-reload 的script代码段重载
         ],
         cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
+        timeout: 5000,
+        
       });
     });
 
@@ -4088,9 +4052,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     });
 
     document.addEventListener('pjax:error', function (e) {
-      // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
-      volantis.pjax.method.error.start();
-      window.location.href = e.triggerElement.href;
+      if(volantis.debug) {
+        console.error(e);
+        console.log('pjax error: \n' + JSON.stringify(e));
+      }else{
+        // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+        volantis.pjax.method.error.start();
+        window.location.href = e.triggerElement.href;
+      }
     });
 </script>
 
