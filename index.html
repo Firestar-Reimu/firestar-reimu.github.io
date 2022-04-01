@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/5.0.0-rc.1'>
-  <meta name="generator" content="Hexo 6.0.0">
+  <meta name="generator" content="Hexo 6.1.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
   <meta name="robots" content="index,follow">
@@ -13,6 +13,7 @@
   <meta name="renderer" content="webkit">
   <meta name="force-rendering" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta http-equiv="Content-Security-Policy" content=" default-src 'self' https:; block-all-mixed-content; base-uri 'self' https:; form-action 'self' https:; worker-src 'self' https:; connect-src 'self' https: *; img-src 'self' data: https: *; media-src 'self' https: *; font-src 'self' data: https: *; frame-src 'self' https: *; manifest-src 'self' https: *; child-src https:; script-src 'self' https: 'unsafe-inline' *; style-src 'self' https: 'unsafe-inline' *; ">
   <meta name="HandheldFriendly" content="True" >
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -20,7 +21,7 @@
   <meta content="Firestar 的幻想乡" name="apple-mobile-web-app-title">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
-  <link rel="preload" href="/css/style.css?time=1648136616659" as="style">
+  <link rel="preload" href="/css/style.css?time=1648814074327" as="style">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/volantis-x/cdn-fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 <link rel="preload" href="/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
@@ -1655,8 +1656,8 @@ ul.list-v >li>a:hover {
 }
 
   </style>
-  <link rel="stylesheet" href="/css/style.css?time=1648136616659" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.css?time=1648136616659"></noscript>
+  <link rel="stylesheet" href="/css/style.css?time=1648814074327" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css?time=1648814074327"></noscript>
   
 <script>
 if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
@@ -1727,9 +1728,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
 
   volantis.GLOBAL_CONFIG ={
-    cdn: {"js":{"app":"/js/app.js?time=1648136616659","sites":"/js/plugins/sites.js?time=1648136616659","friends":"/js/plugins/friends.js?time=1648136616659","parallax":"/js/plugins/parallax.js?time=1648136616659","rightMenu":"/js/plugins/rightMenu.js?time=1648136616659","contributors":"/js/plugins/contributors.js?time=1648136616659","message":"/js/thirdparty/message.js?time=1648136616659","valine":"https://npm.elemecdn.com/valine@1.4/dist/Valine.min.js?time=1648136616659","search":"/js/search/hexo.js?time=1648136616659"},"css":{"style":"/css/style.css?time=1648136616659","message":"/css/message.css?time=1648136616659"}},
+    cdn: {"js":{"app":"/js/app.js?time=1648814074327","sites":"/js/plugins/sites.js?time=1648814074327","friends":"/js/plugins/friends.js?time=1648814074327","parallax":"/js/plugins/parallax.js?time=1648814074327","rightMenu":"/js/plugins/rightMenu.js?time=1648814074327","contributors":"/js/plugins/contributors.js?time=1648814074327","message":"/js/thirdparty/message.js?time=1648814074327","valine":"https://npm.elemecdn.com/valine@1.4/dist/Valine.min.js?time=1648814074327","search":"/js/search/hexo.js?time=1648814074327"},"css":{"style":"/css/style.css?time=1648814074327","message":"/css/message.css?time=1648814074327"}},
     default: {"avatar":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/avatar/round/3442075.svg","link":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg","cover":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/cover/76b86c0226ffd.svg","image":"https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg"},
-    lastupdate: new Date('Thu Mar 24 2022 23:43:36 GMT+0800 (China Standard Time)'),
+    lastupdate: new Date('1648814074327'),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -1755,8 +1756,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         faicon: "fa",
         layout: ["home","hr","help","examples","contributors","hr","source_docs","source_theme","hr","print","darkmode","reading","music"],
         music_alwaysShow: true,
-        customPicUrl: {"enable":false,"old":null,"new":null},
-        print: true
+        customPicUrl: {"enable":false,"old":null,"new":null}
       }
     }
   }
@@ -2106,6 +2106,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     }
   }
   /******************************************************************************/
+  /******************************************************************************/
+  //图像加载出错时的处理
+  function errorImgAvatar(img) {
+    img.src = "https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/avatar/round/3442075.svg";
+    img.onerror = null;
+  }
+  function errorImgCover(img) {
+    img.src = "https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/cover/76b86c0226ffd.svg";
+    img.onerror = null;
+  }
   /******************************************************************************/
 </script>
   <!-- Custom Files head begin-->
@@ -2907,7 +2917,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <!-- internal -->
 
-<script src="/js/app.js?time=1648136616659.js"></script>
+<script src="/js/app.js?time=1648814074327.js"></script>
 
 
 
@@ -3099,7 +3109,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     </ul>
   </div>
-  <script>volantis.js('/js/plugins/rightMenu.js?time=1648136616659')</script>
+  <script>volantis.js('/js/plugins/rightMenu.js?time=1648814074327')</script>
 
 
 
@@ -3112,19 +3122,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       const sites_api = document.getElementById('sites-api');
       if (sites_api != undefined && typeof SitesJS === 'undefined') {
-        volantis.js("/js/plugins/sites.js?time=1648136616659")
+        volantis.js("/js/plugins/sites.js?time=1648814074327")
       }
     
     
       const friends_api = document.getElementById('friends-api');
       if (friends_api != undefined && typeof FriendsJS === 'undefined') {
-        volantis.js("/js/plugins/friends.js?time=1648136616659")
+        volantis.js("/js/plugins/friends.js?time=1648814074327")
       }
     
     
       const contributors_api = document.getElementById('contributors-api');
       if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
-        volantis.js("/js/plugins/contributors.js?time=1648136616659")
+        volantis.js("/js/plugins/contributors.js?time=1648814074327")
       }
     
   };
@@ -3200,7 +3210,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   function loadSearchScript() {
     // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
-    return volantis.js("/js/search/hexo.js?time=1648136616659");
+    return volantis.js("/js/search/hexo.js?time=1648814074327");
   }
 
   function loadSearchService() {
@@ -3516,7 +3526,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     var pjax;
     document.addEventListener('DOMContentLoaded', function () {
       pjax = new Pjax({
-        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox]):not([onclick="return false;"]):not([onclick="return!1"]):not([target="_blank"]):not([target="view_window"]):not([href$=".xml"])',
         selectors: [
           "head title",
           "head meta[name='description']",
