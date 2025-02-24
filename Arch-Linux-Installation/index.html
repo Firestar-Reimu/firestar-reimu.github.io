@@ -1,0 +1,912 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Arch Linux 双系统安装指南 | Firestar 的幻想乡</title><meta name="author" content="Firestar"><meta name="copyright" content="Firestar"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在 ThinkPad X13 2021 Intel 上安装 Arch Linux KDE Plasma + Windows 11 双系统的指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux 双系统安装指南">
+<meta property="og:url" content="https://blog.firestar-reimu.top/Arch-Linux-Installation/index.html">
+<meta property="og:site_name" content="Firestar 的幻想乡">
+<meta property="og:description" content="在 ThinkPad X13 2021 Intel 上安装 Arch Linux KDE Plasma + Windows 11 双系统的指南">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.firestar-reimu.top/img/archlinux.jpg">
+<meta property="article:published_time" content="2021-09-07T14:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T15:22:26.382Z">
+<meta property="article:author" content="Firestar">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.firestar-reimu.top/img/archlinux.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Arch Linux 双系统安装指南",
+  "url": "https://blog.firestar-reimu.top/Arch-Linux-Installation/",
+  "image": "https://blog.firestar-reimu.top/img/archlinux.jpg",
+  "datePublished": "2021-09-07T14:00:00.000Z",
+  "dateModified": "2025-02-24T15:22:26.382Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Firestar",
+      "url": "https://blog.firestar-reimu.top/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.firestar-reimu.top/Arch-Linux-Installation/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Arch Linux 双系统安装指南',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=JetBrains+Mono&family=Roboto+Mono&&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/font.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/Firestar-Reimu/Blog-Source"><i class="fa-fw fab fa-github"></i><span> 源码</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/archlinux.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Firestar 的幻想乡</span></a><a class="nav-page-title" href="/"><span class="site-name">Arch Linux 双系统安装指南</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://github.com/Firestar-Reimu/Blog-Source"><i class="fa-fw fab fa-github"></i><span> 源码</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Arch Linux 双系统安装指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-07T14:00:00.000Z" title="发表于 2021-09-07 22:00:00">2021-09-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-24T15:22:26.382Z" title="更新于 2025-02-24 23:22:26">2025-02-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="准备工作"><strong>准备工作</strong></h2>
+<h3 id="下载-Arch-Linux-系统-ISO-镜像"><strong>下载 Arch Linux 系统 ISO 镜像</strong></h3>
+<h4 id="Arch-Linux-官网下载"><strong>Arch Linux 官网下载</strong></h4>
+<p>官网的下载地址为：</p>
+<p><a target="_blank" rel="noopener" href="https://archlinux.org/releng/releases/">Arch Linux – Releases</a></p>
+<p>但是只提供 Torrent 和 Magnet 链接</p>
+<h4 id="镜像网站下载"><strong>镜像网站下载</strong></h4>
+<p>可以在清华大学镜像：</p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/</a></p>
+<p>或者上海交大镜像：</p>
+<p><a target="_blank" rel="noopener" href="https://mirror.sjtu.edu.cn/archlinux/iso/latest/">https://mirror.sjtu.edu.cn/archlinux/iso/latest/</a></p>
+<p>下载到最新版的系统 ISO 镜像</p>
+<h4 id="本地制作-ISO-镜像"><strong>本地制作 ISO 镜像</strong></h4>
+<p>还可以用下面的方法在一台 Arch Linux 设备上制作自定义的 ISO 镜像：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Archiso">Archiso – ArchWiki</a></p>
+<p>制作之前需要下载软件 <code>archiso</code>，然后复制配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r /usr/share/archiso/configs/baseline/ (profile_directory)</span><br></pre></td></tr></table></figure>
+<p>并执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mkarchiso (profile_directory)/baseline</span><br></pre></td></tr></table></figure>
+<p>在 <code>(profile_directory)</code> 目录的 <code>out</code> 文件夹下可以找到 ISO 镜像</p>
+<h3 id="为-Linux-系统分区"><strong>为 Linux 系统分区</strong></h3>
+<p>右键点击开始菜单，选择“磁盘管理”，分出一块空分区，建议不小于 64GiB</p>
+<p><strong>Windows 安装程序会创建一个 100MiB 的 EFI 系统分区，一般并不足以放下双系统所需要的所有文件（即 Linux 的 GRUB 文件），可以在将 Windows 安装到盘上之前就用 Arch 安装媒体创建一个较大的 EFI 系统分区（建议多于 512MiB），之后 Windows 安装程序将会使用你自己创建的 EFI 分区，而不是再创建一个</strong></p>
+<h3 id="关闭快速启动"><strong>关闭快速启动</strong></h3>
+<p>Windows 工具 &gt;&gt; 控制面板 &gt;&gt; 电源选项 &gt;&gt; 选择电源按钮的功能 &gt;&gt; 更改当前不可用的设置 &gt;&gt; 关闭快速启动 &gt;&gt; 保存修改</p>
+<h3 id="关闭-Secure-Boot"><strong>关闭 Secure Boot</strong></h3>
+<h4 id="进入-UEFI-BIOS-设置"><strong>进入 UEFI/BIOS 设置</strong></h4>
+<p>ThinkPad 的操作如下：启动 ThinkPad 时按 <code>Enter</code> 打断正常开机，然后按下 <code>Fn+Esc</code> 解锁 <code>Fn</code> 按钮，再按 <code>Fn+F1</code> 进入 UEFI/BIOS 设置</p>
+<h4 id="关闭-Secure-Boot-2"><strong>关闭 Secure Boot</strong></h4>
+<p>在 UEFI/BIOS 设置界面：</p>
+<p>ThinkPad 的操作如下：Security &gt;&gt; Secure Boot &gt;&gt; Off</p>
+<h3 id="删除多余的-Windows-启动项"><strong>删除多余的 Windows 启动项</strong></h3>
+<p>如果在电脑上装有多个 Windows，则系统只会选择其中一个在 Windows Boot Manager 中启动，若要删除多余的启动项，在 Windows 的“系统配置”（搜索框中输入 <code>msconfig</code> 或在“Windows 工具”中选择）的“引导”页面即可删除</p>
+<h3 id="刻录-USB-启动盘"><strong>刻录 USB 启动盘</strong></h3>
+<h4 id="Windows-系统方案"><strong>Windows 系统方案</strong></h4>
+<p>Windows 上可以用 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">Rufus</a>，支持 Windows 和 Linux 系统镜像，但无法在 Linux 上使用（只提供 Windows 版 EXE 可执行文件）</p>
+<h4 id="Linux-系统方案"><strong>Linux 系统方案</strong></h4>
+<p>Linux 上可以用命令行刻录 USB 启动盘</p>
+<p>首先使用 <code>lsblk</code> 检查 USB 设备的名称（<code>NAME</code> 一列）和挂载点（<code>MOUNTPOINTS</code> 一列），例如 <code>/dev/sda</code>，需要设备处于插入但未挂载的状态</p>
+<p>如果被挂载，可以用 <code>sudo umount (partition_name)</code> 或 <code>sudo umount (mount_point)</code> 卸载设备，卸载磁盘的所有被挂载的分区</p>
+<p>例如 <code>sudo umount /dev/sda1</code> 或 <code>sudo umount /run/media/(user_name)/(device_label)</code></p>
+<p>之后格式化磁盘：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> wipefs --all /dev/sda</span><br></pre></td></tr></table></figure>
+<p>之后直接将 ISO 镜像拷贝到 USB 中（这一步需要数分钟）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> (iso_path)/(iso_name) /dev/sda</span><br></pre></td></tr></table></figure>
+<h4 id="跨平台方案"><strong>跨平台方案</strong></h4>
+<p>推荐使用 <a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/index.html">Ventoy</a>，在 Windows 和 Linux 上都可以使用，方法是下载安装包后解压、安装到 USB 上，之后直接将 ISO 镜像拷贝到 USB 中即可选择镜像文件进行登录系统，支持多个系统镜像登录</p>
+<h3 id="从-USB-启动"><strong>从 USB 启动</strong></h3>
+<h4 id="在-Windows-中设置从-USB-启动"><strong>在 Windows 中设置从 USB 启动</strong></h4>
+<p>设置 &gt;&gt; 恢复 &gt;&gt; 立即重新启动 &gt;&gt; USB HDD</p>
+<h4 id="在-UEFI-中设置从-USB-启动"><strong>在 UEFI 中设置从 USB 启动</strong></h4>
+<p>启动时按 <code>Enter</code> 打断正常开机，然后按下 <code>Fn+Esc</code> 解锁 <code>Fn</code> 按钮，再按 <code>Fn+F12</code> 选择第一个启动项为 USB HDD</p>
+<h2 id="安装系统"><strong>安装系统</strong></h2>
+<h3 id="连接到互联网"><strong>连接到互联网</strong></h3>
+<p>检查确保系统已经启用了网络接口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span></span><br></pre></td></tr></table></figure>
+<p>对于无线局域网（WLAN）和无线广域网（WWAN），请确保网卡未被 <code>rfkill</code> 禁用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rfkill</span><br></pre></td></tr></table></figure>
+<p>此时应该全部显示 <code>unblocked</code>，否则使用命令 <code>rfkill unblock (type_name)</code> 启用，例如 <code>rfkill unblock wlan</code></p>
+<p>如果使用有线以太网，连接网线即可</p>
+<p>如果使用 WiFi，使用 <code>iwctl</code> 连接无线网络：</p>
+<p>首先找到网络设备：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwctl device list</span><br></pre></td></tr></table></figure>
+<p>获得 <code>device_name</code>，一般是 <code>wlan0</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iwctl station (device_name) scan</span><br><span class="line">iwctl station (device_name) get-networks</span><br><span class="line">iwctl station (device_name) connect (SSID)</span><br></pre></td></tr></table></figure>
+<p>也可以输入 <code>iwctl</code> 进入交互模式，此时命令前面会显示 <code>[iwd]#</code> 标志</p>
+<p>上面的命令不加 <code>iwctl</code> 输入，最后用 <code>exit</code> 推出</p>
+<p>连接到有线或无线网络后，可以用 <code>ping</code> 测试：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping -c (count_number) archlinux.org</span><br></pre></td></tr></table></figure>
+<h3 id="更新系统时间"><strong>更新系统时间</strong></h3>
+<p>使用 <code>timedatectl</code> 开启 NTP 同步时间，确保系统时间是准确的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl set-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="建立硬盘分区"><strong>建立硬盘分区</strong></h3>
+<p><strong>对 Linux 分区建议使用 EXT4/XFS/BTRFS 文件系统</strong></p>
+<p>可以使用 <code>lsblk -f</code> 或 <code>fdisk -l</code> 查看硬盘 <code>/dev/(disk_name)</code>，如 <code>/dev/sda</code>、<code>/dev/nvme0n1</code> 等，前者多用于 HDD，后者多用于 SSD</p>
+<p>修改分区可以用 <code>parted /dev/(disk_name)</code>、<code>cfdisk /dev/(disk_name)</code>、<code>fdisk /dev/(disk_name)</code> 等，下面以 <code>parted</code> 为例：</p>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/(disk_name)</span><br></pre></td></tr></table></figure>
+<p>此时进入交互模式，命令行前面会显示 <code>(parted)</code></p>
+<p>如果一个硬盘没有做过分区，或者是需要修改分区表的类型，则要为对应的设备创建/重建分区表，使用以下命令创建 GUID 分区表（GPT）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(parted) mklabel gpt</span><br></pre></td></tr></table></figure>
+<p>对于 UEFI/GPT 分区方案，需要创建新的 EFI 系统分区（建议从 1MiB 开始对齐）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(parted) mkpart <span class="string">&quot;EFI system partition&quot;</span> fat32 1MiB 256MiB</span><br><span class="line">(parted) <span class="built_in">set</span> 1 esp on</span><br></pre></td></tr></table></figure>
+<p>再创建一个 Linux 根分区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(parted) mkpart <span class="string">&quot;root partition&quot;</span> ext4 256MiB 100%</span><br><span class="line">(parted) <span class="built_in">type</span> 2 4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709</span><br></pre></td></tr></table></figure>
+<p><code>parted</code> 常用命令：</p>
+<ul>
+<li><code>help</code>：帮助</li>
+<li><code>print</code>：显示分区状态</li>
+<li><code>unit</code>：更改单位，推荐使用 <code>s</code>（扇区）</li>
+<li><code>set</code>：设置 <code>flag</code>，例如在分区 1 上创建 EFI 分区需要设置 <code>flag</code> 为 <code>esp</code>：<code>set 1 esp on</code></li>
+<li><code>mkpart</code>：创建分区，分区标签可以自定义，文件系统类型选择 <code>fat32</code>（对 EFI 分区），<code>ext4/xfs/btrfs</code>（对 Linux 分区），<code>ntfs</code>（对 Windows 分区）</li>
+<li><code>resizepart</code>：改变分区大小</li>
+<li><code>rm</code>：删除分区</li>
+<li><code>name</code>：更改分区名字，比如将分区 2 改名为 <code>Arch</code>，需要设置：<code>name 2 'Arch'</code></li>
+<li><code>quit</code>：退出</li>
+</ul>
+<p>更多操作参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://www.gnu.org/software/parted/manual/parted.html">GNU Parted User Manual</a></p>
+<h3 id="创建文件系统"><strong>创建文件系统</strong></h3>
+<p>如果新创建了 EFI 系统分区 <code>/dev/(EFI_system_partition)</code> ，需要使用 <code>mkfs.fat</code> 将其格式化为 FAT32：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F 32 /dev/(EFI_system_partition)</span><br></pre></td></tr></table></figure>
+<p>例如要在根分区 <code>/dev/(root_partition)</code> 上创建一个 EXT4 文件系统，请运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/(root_partition)</span><br></pre></td></tr></table></figure>
+<p>XFS 和 BTRFS 对应的命令就是 <code>mkfs.xfs</code> 和 <code>mkfs.btrfs</code></p>
+<p>如果需要覆盖原有分区，加入 <code>-f</code> 参数强制执行即可</p>
+<p><strong>只有在分区步骤中创建 EFI 系统分区时才需要格式化，如果这个磁盘上已经存在一个 EFI 系统分区，将它重新格式化会破坏其他已安装操作系统的引导加载程序</strong></p>
+<h3 id="挂载分区"><strong>挂载分区</strong></h3>
+<p>首先将根磁盘卷挂载到 <code>/mnt</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/(root_partition) /mnt</span><br></pre></td></tr></table></figure>
+<p>对于 UEFI 系统，挂载 EFI 系统分区（一般是 <code>lsblk</code> 输出的第一个分区，文件系统一般是 FAT32）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">mkdir</span> /dev/(EFI_system_partition) /mnt/boot</span><br></pre></td></tr></table></figure>
+<p><strong>挂载 EFI 系统分区一定要加 <code>--mkdir</code> 参数</strong></p>
+<h3 id="选择镜像源"><strong>选择镜像源</strong></h3>
+<p><strong>一般建议选择清华大学镜像和上海交大镜像，这两个镜像站覆盖较全、稳定且积极维护</strong></p>
+<p>编辑 <code>/etc/pacman.d/mirrorlist</code>（ISO 镜像中自带有 <code>vim</code> 等常用编辑器）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>按 <code>:</code> 进入命令模式，输入 <code>:%d</code>并按 <code>Enter</code> 删除全部内容，添加：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</span><br></pre></td></tr></table></figure>
+<p>改为清华大学镜像</p>
+<p>或添加：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch</span><br></pre></td></tr></table></figure>
+<p>改为上海交大镜像</p>
+<p><strong>这个文件接下来还会被 <code>pacstrap</code> 复制到新系统里，所以请确保设置正确</strong></p>
+<h3 id="安装必需的软件包"><strong>安装必需的软件包</strong></h3>
+<p>使用 <code>pacstrap</code> 脚本，安装 base 软件包、Linux 内核、常规硬件的固件、文本编辑器等：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base linux linux-firmware vim</span><br></pre></td></tr></table></figure>
+<p>对于本电脑，还需要安装 <code>sof-firmware</code> 声卡驱动</p>
+<h3 id="生成-fstab-文件"><strong>生成 fstab 文件</strong></h3>
+<p>用以下命令生成 fstab 文件（用 <code>-U</code> 或 <code>-L</code> 选项设置 UUID 或卷标，）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h3 id="进入新的-Archlinux-系统"><strong>进入新的 Archlinux 系统</strong></h3>
+<p>更改根目录到新安装的系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<p>更新软件包缓存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu</span><br></pre></td></tr></table></figure>
+<h3 id="时区"><strong>时区</strong></h3>
+<p>设置时区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h3 id="本地化"><strong>本地化</strong></h3>
+<p>编辑 <code>/etc/locale.gen</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>取消掉 <code>en_US.UTF-8 UTF-8</code> 和 <code>zh_CN.UTF-8 UTF-8</code> 两行的注释</p>
+<p>接着生成 locale 信息，运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+<p>然后创建 <code>/etc/locale.conf</code> 文件，并编辑设定 <code>LANG</code> 变量：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<p><strong>不推荐在 <code>locale.conf</code> 中设置任何中文 locale，会导致 TTY 乱码</strong></p>
+<h3 id="网络配置"><strong>网络配置</strong></h3>
+<p>创建 <code>/etc/hostname</code> 文件，写入自定义的主机名：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(my_hostname)</span><br></pre></td></tr></table></figure>
+<p>编辑本地主机名解析 <code>/etc/hosts</code>，写入：（编辑 <code>/etc/hosts</code> 时空白建议用 <code>Tab</code> 键）</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1        localhost</span><br><span class="line">::1              localhost</span><br><span class="line">127.0.1.1        (my_hostname)</span><br></pre></td></tr></table></figure>
+<p>安装网络管理软件 <code>NetworkManager</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S networkmanager</span><br></pre></td></tr></table></figure>
+<p>启用 <code>NetworkManager</code>（<code>systemctl</code> 命令对大小写敏感）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br></pre></td></tr></table></figure>
+<p><strong>一定要安装网络管理软件，否则重启后将无法联网</strong></p>
+<h3 id="创建-initramfs"><strong>创建 initramfs</strong></h3>
+<p>之后执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkinitcpio -P</span><br></pre></td></tr></table></figure>
+<h3 id="Root-用户密码"><strong>Root 用户密码</strong></h3>
+<p>设置 Root 用户密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h3 id="安装引导程序"><strong>安装引导程序</strong></h3>
+<p><strong>这是安装的最后一步也是至关重要的一步，请按指引正确安装好引导加载程序后再重新启动，否则重启后将无法正常进入系统</strong></p>
+<p>首先下载 <code>grub</code> 和 <code>efibootmgr</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br></pre></td></tr></table></figure>
+<p>输入 <code>efibootmgr</code> 可以查看所有的启动项，每一个启动项都有一个四位数字的编号 <code>(boot_number)</code>，可以使用 <code>efibootmgr -b (boot_number) -B</code> 命令删除原来的启动项</p>
+<p>接着执行以下命令：（<code>--bootloader-id</code> 可以自定义）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Archlinux</span><br></pre></td></tr></table></figure>
+<p>最后更新 GRUB 设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="重启"><strong>重启</strong></h3>
+<p>输入 <code>exit</code> 退出 chroot 环境</p>
+<p>输入 <code>umount -R /mnt</code> 手动卸载被挂载的分区</p>
+<p>最后，执行 <code>reboot</code> 重启系统，<code>systemd</code> 将自动卸载仍然挂载的任何分区</p>
+<p><strong>不要忘记移除安装介质</strong></p>
+<h2 id="初始配置"><strong>初始配置</strong></h2>
+<p><strong>现在登录到新装好的系统时使用的是 Root 用户，用户名为 <code>root</code>，需要手动输入</strong></p>
+<h3 id="连接网络"><strong>连接网络</strong></h3>
+<p>命令行输入 <code>nmtui</code> 并按照终端上的图形界面一步一步操作</p>
+<h3 id="设置新用户"><strong>设置新用户</strong></h3>
+<p>设置用户名为 <code>(user_name)</code>，建议只使用小写字母和数字：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel (user_name)</span><br></pre></td></tr></table></figure>
+<p>为用户创建密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd (user_name)</span><br></pre></td></tr></table></figure>
+<p><strong>一定要设置在 wheel 用户组里面</strong></p>
+<h3 id="sudo-配置"><strong>sudo 配置</strong></h3>
+<p>首先需要下载 <code>sudo</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S <span class="built_in">sudo</span></span><br></pre></td></tr></table></figure>
+<p>sudo 的配置文件是 <code>/etc/sudoers</code>，更改配置需要使用命令 <code>visudo</code>，其默认编辑器是 Vi，若要改为 Vim，则首先在终端中输入以下命令用 Vim 打开 <code>visudo</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EDITOR=vim visudo</span><br></pre></td></tr></table></figure>
+<h4 id="更改默认编辑器为-Vim"><strong>更改默认编辑器为 Vim</strong></h4>
+<p>在开头的一个空行键入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults editor=/usr/bin/vim</span><br></pre></td></tr></table></figure>
+<p>按 <code>Esc</code> 进入命令模式，再按 <code>:x</code> 保存，按 <code>Enter</code> 退出</p>
+<h4 id="用户组授权"><strong>用户组授权</strong></h4>
+<p>取消注释 <code>%wheel ALL=(ALL) ALL</code></p>
+<p>如果不想每次执行 Root 用户命令都输入密码，可以取消注释 <code>%wheel ALL=(ALL) NOPASSWD: ALL</code></p>
+<p><strong>必须保留最前面的 <code>%</code>，这不是注释的一部分</strong></p>
+<h4 id="单个用户免密码"><strong>单个用户免密码</strong></h4>
+<p>在最后一行（空行）按 <code>i</code> 进入输入模式，加上这一行：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults:(user_name) !authenticate</span><br></pre></td></tr></table></figure>
+<p>进入命令模式，保存退出即可</p>
+<p><strong>注：如果想保留输入密码的步骤但是想在输入密码时显示星号，则加上一行 <code>Defaults env_reset,pwfeedback</code> 即可</strong></p>
+<h3 id="安装并启用蓝牙"><strong>安装并启用蓝牙</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S bluez</span><br><span class="line">systemctl <span class="built_in">enable</span> bluetooth</span><br></pre></td></tr></table></figure>
+<h3 id="KDE-Plasma-桌面安装"><strong>KDE Plasma 桌面安装</strong></h3>
+<h4 id="安装-Wayland-和-SDDM"><strong>安装 Wayland 和 SDDM</strong></h4>
+<p>安装 Wayland：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S wayland</span><br></pre></td></tr></table></figure>
+<p>安装 SDDM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S sddm</span><br></pre></td></tr></table></figure>
+<p>SDDM 字体选择 <code>noto-fonts</code></p>
+<h4 id="启用-SDDM"><strong>启用 SDDM</strong></h4>
+<p><strong>不启用 SDDM 等显示管理器则无法进入图形界面</strong></p>
+<p>启用 SDDM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
+<h4 id="安装-Plasma-桌面"><strong>安装 Plasma 桌面</strong></h4>
+<p>安装 Plasma 桌面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S plasma</span><br></pre></td></tr></table></figure>
+<p>可以排除掉一些软件包，如 <code>discover</code>、<code>drkonqi</code>、<code>flatpak-kcm</code>、<code>plasma-firewall</code>、<code>plasma-welcome</code></p>
+<p><code>qt6-multimedia-backend</code> 选择 <code>qt6-multimedia-ffmpeg</code></p>
+<p><code>jack</code> 选择 <code>pipewire-jack</code></p>
+<p><code>emoji-font</code> 选择 <code>noto-fonts-emoji</code></p>
+<p>这一步默认下载的是 Pipewire 多媒体框架，以替代原有的 PulseAudio</p>
+<h4 id="安装必要的软件"><strong>安装必要的软件</strong></h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S firefox konsole dolphin dolphin-plugins ark kate gwenview spectacle yakuake okular poppler-data git adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts</span><br></pre></td></tr></table></figure>
+<p><code>firefox</code> 也可以替换为其余浏览器，但可能需要使用 AUR 软件包管理器（使用方法见下文），例如 <code>microsoft-edge-stable-bin</code> 和 <code>google-chrome</code></p>
+<p><code>dolphin-plugins</code> 提供了右键菜单挂载 ISO 镜像等选项</p>
+<p><code>poppler-data</code> 是 PDF 渲染所需的编码数据，不下载 <code>poppler-data</code> 会导致部分 PDF 文件的中文字体无法在 Okular 中显示</p>
+<p><strong>KDE Frameworks/KDE Gear/Plasma 的更新时间表可以在 <a target="_blank" rel="noopener" href="https://community.kde.org/Schedules">KDE Community Wiki</a> 查看</strong></p>
+<h2 id="在图形界面下设置"><strong>在图形界面下设置</strong></h2>
+<p><strong>现在重启电脑后即可进入图形界面，用户从 Root 变为新建的普通用户</strong></p>
+<h3 id="系统设置"><strong>系统设置</strong></h3>
+<p><strong>此时系统语言为英语，可以执行 <code>export LANGUAGE=zh_CN.UTF-8</code> 将终端输出修改为中文，再执行 <code>systemsettings</code> 打开系统设置</strong></p>
+<h4 id="语言和区域设置"><strong>语言和区域设置</strong></h4>
+<p><strong>将系统语言改为中文需要保证 <code>localectl list-locales</code> 输出包含 <code>zh_CN.UTF-8</code> 并且安装了中文字体（否则会缺字无法显示）</strong></p>
+<p>系统设置 &gt;&gt; 区域和语言 &gt;&gt; 语言 &gt;&gt; 改为“简体中文”</p>
+<p>其余“数字”、“时间”、“货币”等选项可以分别修改，可以搜索“China”找到“简体中文”</p>
+<h4 id="电源、开机、锁屏设置"><strong>电源、开机、锁屏设置</strong></h4>
+<p>系统设置 &gt;&gt; 省电功能 &gt;&gt; 节能 &gt;&gt; “交流供电”以及“电池供电” &gt;&gt; 合上笔记本盖时 &gt;&gt; 选择“息屏”</p>
+<p>系统设置 &gt;&gt; 会话 &gt;&gt; 桌面会话 &gt;&gt; 登入时 &gt;&gt; 选择“启动为空会话”</p>
+<p>系统设置 &gt;&gt; 锁屏 &gt;&gt; 自动锁定屏幕 &gt;&gt; 调整空闲时间</p>
+<h4 id="高分辨率设置"><strong>高分辨率设置</strong></h4>
+<p>Wayland 会自动启用缩放率 175% 和光标大小 24，如果不合适可以如下调整：</p>
+<p>系统设置 &gt;&gt; 显示和监视器 &gt;&gt; 分辨率 &gt;&gt; 缩放率 &gt;&gt; 200%</p>
+<p>系统设置 &gt;&gt; 显示和监视器 &gt;&gt; 旧式应用程序（X11） &gt;&gt; 由应用程序进行缩放</p>
+<p>系统设置 &gt;&gt; 光标 &gt;&gt; 大小 &gt;&gt; 18</p>
+<h4 id="SDDM-设置"><strong>SDDM 设置</strong></h4>
+<p>系统设置 &gt;&gt; 颜色和主题 &gt;&gt; 登录屏幕（SDDM） &gt;&gt; 选择“Breeze 微风” &gt;&gt; 应用 Plasma 设置</p>
+<p>创建文件 <code>/etc/sddm.conf.d/hidpi.conf</code>，并加入以下内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">GreeterEnvironment=QT_SCREEN_SCALE_FACTORS=2,QT_FONT_DPI=192</span><br><span class="line"></span><br><span class="line">[Wayland]</span><br><span class="line">EnableHiDPI=true</span><br></pre></td></tr></table></figure>
+<p>然后重启电脑</p>
+<h4 id="锁屏设置"><strong>锁屏设置</strong></h4>
+<p>自动锁定屏幕的时间和锁屏界面的外观等在此处设置：</p>
+<p>系统设置 &gt;&gt; 工作区行为 &gt;&gt; 锁屏</p>
+<h4 id="自动启动设置"><strong>自动启动设置</strong></h4>
+<p>系统设置 &gt;&gt; 自动启动</p>
+<p>可以添加 Yakuake 下拉终端为自动启动</p>
+<h4 id="自动挂载设置"><strong>自动挂载设置</strong></h4>
+<p>系统设置 &gt;&gt; 磁盘和相机 &gt;&gt; 设备自动挂载 &gt;&gt; 所有设备</p>
+<p>勾选“登录时”和“插入时”，以及“自动挂载新的可移动设备”</p>
+<h3 id="终端快捷键配置"><strong>终端快捷键配置</strong></h3>
+<p>打开终端 Konsole/Yakuake（Yakuake 设置自动启动后可以用 <code>Fn+F12</code> 直接打开）：</p>
+<p>设置 &gt;&gt; 配置键盘快捷键 &gt;&gt; 复制改为 <code>Ctrl+C</code> ，粘贴改为 <code>Ctrl+V</code>，查找改为 <code>Ctrl+F</code></p>
+<h3 id="pacman-包管理器的使用技巧"><strong>pacman 包管理器的使用技巧</strong></h3>
+<p>这里介绍了 <code>pacman</code> 包管理器的常用操作</p>
+<p>更多操作参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Pacman">Pacman – ArchWiki</a></p>
+<p>也可以使用 <code>man pacman</code> 和 <code>man pacman.conf</code> 查询</p>
+<h4 id="下载软件包"><strong>下载软件包</strong></h4>
+<p>下载软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S (package_name)</span><br></pre></td></tr></table></figure>
+<h4 id="删除软件包"><strong>删除软件包</strong></h4>
+<p>删除软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -R (package_name)</span><br></pre></td></tr></table></figure>
+<p>删除软件包，及其所有未被其他已安装软件包依赖的软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Rs (package_name)</span><br></pre></td></tr></table></figure>
+<p>删除软件包，及其 <code>pacman</code> 备份文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Rn (package_name)</span><br></pre></td></tr></table></figure>
+<h4 id="更新软件包"><strong>更新软件包</strong></h4>
+<p>更新所有软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+<h4 id="搜索软件包"><strong>搜索软件包</strong></h4>
+<p><code>pacman</code> 使用 <code>-Q</code> 参数查询本地软件包数据库，<code>-S</code> 查询远程数据库（包含全部软件包），以及 <code>-F</code> 查询文件数据库</p>
+<p>要了解每个参数的子选项，分别参见 <code>pacman -Q --help</code>，<code>pacman -S --help</code> 和 <code>pacman -F --help</code></p>
+<p>在远程数据库中查询软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ss (package_name)</span><br></pre></td></tr></table></figure>
+<p>搜索已安装的软件包：（<code>-s</code> 会使用正则表达式匹配所有相似的结果，如果没有 <code>-s</code> 会只显示全词匹配）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Qs (package_name)</span><br></pre></td></tr></table></figure>
+<p>列出所有已安装的软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Q</span><br></pre></td></tr></table></figure>
+<p>列出所有已安装的仓库外（一般就是 AUR）软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Qm</span><br></pre></td></tr></table></figure>
+<p>列出所有孤立软件包（不再作为依赖的软件包），可以加 <code>-q</code> 选项不显示版本号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Qdt</span><br></pre></td></tr></table></figure>
+<p>获取已安装软件包所包含文件路径（比如用来查看软件包提供了什么可执行文件）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ql (package_name)</span><br></pre></td></tr></table></figure>
+<p>查询文件属于远程数据库中的哪个软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -F (file_name)</span><br></pre></td></tr></table></figure>
+<p>查询远程库中软件包包含的文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Fl (package_name)</span><br></pre></td></tr></table></figure>
+<h4 id="检查依赖关系"><strong>检查依赖关系</strong></h4>
+<p>以树状图的形式展示某软件包的依赖关系：（需要下载 <code>pacman-contrib</code> 软件包）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pactree (package_name)</span><br></pre></td></tr></table></figure>
+<h4 id="降级软件包"><strong>降级软件包</strong></h4>
+<p>在 <code>/var/cache/pacman/pkg/</code> 中找到旧软件包，双击打开安装实现手动降级，参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Downgrading_packages">Downgrading Packages – ArchWiki</a></p>
+<h4 id="清理缓存"><strong>清理缓存</strong></h4>
+<p><code>pacman-contrib</code> 软件包提供的 <code>paccache</code> 脚本默认会删除所有缓存的版本和已卸载的软件包，除了最近的3个会被保留：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> paccache -r</span><br></pre></td></tr></table></figure>
+<p>更激进的方式是使用 <code>pacman</code> 清理全部软件安装包缓存：（即删除 <code>/var/cache/pacman/pkg/</code>、<code>/var/lib/pacman/</code> 下的全部内容）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Scc</span><br></pre></td></tr></table></figure>
+<p>清理无用的孤立软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -R $(pacman -Qdtq)</span><br></pre></td></tr></table></figure>
+<p>若显示 <code>error: no targets specified (use -h for help)</code> 则说明没有孤立软件包需要清理</p>
+<p><strong>若不小心终止了 <code>pacman</code> 进程，则需要先删除 <code>/var/lib/pacman/db.lck</code> 才能再次启动 <code>pacman</code></strong></p>
+<h4 id="从本地安装包安装软件"><strong>从本地安装包安装软件</strong></h4>
+<p>pacman 有从本地安装包安装软件的功能，只需输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -U (package_name).tar.zst</span><br></pre></td></tr></table></figure>
+<h4 id="从-PKGBUILD-安装软件"><strong>从 PKGBUILD 安装软件</strong></h4>
+<p>在 PKGBUILD 所在的文件夹内执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+<p>即可安装</p>
+<h3 id="AUR-软件仓库"><strong>AUR 软件仓库</strong></h3>
+<p>首先安装 <code>base-devel</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S base-devel</span><br></pre></td></tr></table></figure>
+<p>之后下载支持 AUR 的软件包管理器</p>
+<p><strong>注意 Arch 预装的包管理器 pacman 不支持 AUR，也不打包 AUR 软件包管理器，需要单独下载 AUR 软件包管理器</strong></p>
+<h4 id="paru"><strong>paru</strong></h4>
+<p>paru 是一个支持官方仓库和 AUR 仓库的命令行软件包管理器</p>
+<p>执行以下命令安装 paru：（需要保证能够连接 GitHub，一般需要修改 hosts）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://aur.archlinux.org/paru-bin.git</span><br><span class="line"><span class="built_in">cd</span> paru-bin</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+<p>paru 是一个 pacman 封装，其命令与 pacman 基本相同，即将上一节的 <code>pacman/sudo pacman</code> 替换为 <code>paru</code></p>
+<p>详细使用教程参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Morganamilo/paru">paru – GitHub</a></p>
+<p>也可以使用 <code>man paru</code> 和 <code>man paru.conf</code> 查询</p>
+<p>如果不想让 <code>paru</code> 下载软件包时显示 <code>PKGBUILD</code> 文件内容，需要在 <code>/etc/paru.conf</code> 的 <code>[options]</code> 一栏中加入一行 <code>SkipReview</code></p>
+<h4 id="octopi"><strong>octopi</strong></h4>
+<p>octopi 是一个使用图形界面的软件包管理器，执行以下命令安装 <code>pamac</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://aur.archlinux.org/octopi.git</span><br><span class="line"><span class="built_in">cd</span> octopi</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+<p>其使用教程参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://tintaescura.com/projects/octopi">Octopi – Tinta escura</a></p>
+<p>octopi 的 AUR 支持需要点击中间的绿色外星人图标，依赖 paru 等软件包管理器</p>
+<h3 id="Arch-Linux-CN-软件仓库（可选）"><strong>Arch Linux CN 软件仓库（可选）</strong></h3>
+<p>在 <code>/etc/pacman.conf</code> 文件末尾添加以下两行以启用清华大学镜像：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
+<p>或上海交大镜像：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.sjtug.sjtu.edu.cn/archlinux-cn/$arch</span><br></pre></td></tr></table></figure>
+<p>之后执行下面的命令安装 <code>archlinuxcn-keyring</code> 包导入 GPG 密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Sy archlinuxcn-keyring</span><br><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+<p>这样就开启了 pacman 对 Arch Linux CN 的支持</p>
+<p><strong>注意一定要写第一行的 <code>[archlinuxcn]</code>，安装 archlinuxcn-keyring 时要用 <code>-Sy</code> 安装（更新后安装）</strong></p>
+<h3 id="Arch4edu-软件仓库（可选）"><strong>Arch4edu 软件仓库（可选）</strong></h3>
+<p>Arch4edu 是面向高校用户推出的非官方软件仓库，支持 Arch Linux 和 Arch Linux ARM，主要包含高校用户常用的科研、教学及开发软件</p>
+<p>首先导入 GPG 密钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman-key --recv-keys 7931B6D628C8D3BA</span><br><span class="line">pacman-key --finger 7931B6D628C8D3BA</span><br><span class="line">pacman-key --lsign-key 7931B6D628C8D3BA</span><br></pre></td></tr></table></figure>
+<p>在 <code>/etc/pacman.conf</code> 文件末尾添加以下两行以启用清华大学镜像：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[arch4edu]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch</span><br></pre></td></tr></table></figure>
+<p>最后更新系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+<p>这样就开启了 pacman 对 Arch4edu 的支持</p>
+<h3 id="双系统启动设置"><strong>双系统启动设置</strong></h3>
+<p>下载 <code>os-prober</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S os-prober</span><br></pre></td></tr></table></figure>
+<p>想要让 <code>grub-mkconfig</code> 探测其他已经安装的系统并自动把他们添加到启动菜单中，编辑 <code>/etc/default/grub</code> 并取消下面这一行的注释：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DISABLE_OS_PROBER=false</span><br></pre></td></tr></table></figure>
+<p>想要让 GRUB 记住上一次启动的启动项，首先将 <code>GRUB_DEFAULT</code> 的值改为 <code>saved</code>，再取消下面这一行的注释：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_SAVEDEFAULT=true</span><br></pre></td></tr></table></figure>
+<p>使用 <code>grub-mkconfig</code> 工具重新生成 <code>/boot/grub/grub.cfg</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>此时会显示找到 Windows Boot Manager，说明设置双系统成功</p>
+<p>如果下载了 AUR 软件包 <code>update-grub</code>，则可以直接执行 <code>sudo update-grub</code> 更新 GRUB 设置</p>
+<h3 id="Linux-挂载-Windows-磁盘"><strong>Linux 挂载 Windows 磁盘</strong></h3>
+<h4 id="使用-fstab-文件"><strong>使用 fstab 文件</strong></h4>
+<p><strong>首先要确保设备加密和快速启动已经关闭，以下内容针对 Linux 5.15 及之后的内核中引入的 NTFS3 驱动</strong></p>
+<p>官方推荐的方法是使用 UUID，以分别挂载 C 盘和 D 盘到 <code>/home/(user_name)/C</code> 和 <code>/home/(user_name)/D</code> 为例，在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk -f</span><br></pre></td></tr></table></figure>
+<p>在输出结果中可以发现 Windows 的硬盘分区，其中第一列（<code>NAME</code>）是卷标，第四列（<code>UUID</code>）是 UUID：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NAME       FSTYPE       LABEL   UUID</span><br><span class="line">├─(name_C) ntfs         C       (UUID_C)</span><br><span class="line">├─(name_D) ntfs         D       (UUID_D)</span><br></pre></td></tr></table></figure>
+<p>接着就来修改系统文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>在最后加入这两行：（编辑 <code>/etc/fstab</code> 时空白建议用 <code>Tab</code> 键）</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UUID=(UUID_C)                     /home/(user_name)/C    ntfs3 defaults,uid=1000,gid=1000,nohidden,windows_names,discard 0 0</span><br><span class="line">UUID=(UUID_D)                     /home/(user_name)/D    ntfs3 defaults,uid=1000,gid=1000,nohidden,windows_names,discard 0 0</span><br></pre></td></tr></table></figure>
+<p>此处的挂载选项可以在此基础上自行选择增减，参见：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.kernel.org/filesystems/ntfs3.html">NTFS3 — The Linux Kernel documentation</a></p>
+<p>重启电脑后，即可自动挂载</p>
+<p><strong>如果需要格式化 C 盘或 D 盘，先从 <code>/etc/fstab</code> 中删去对应的行，再操作，之后磁盘的 <code>UUID</code> 会被更改，再编辑 <code>/etc/fstab</code> ，重启挂载即可</strong></p>
+<p>如果安装生成 fstab 文件时使用 <code>-L</code> 选项，即 <code>genfstab -L /mnt &gt;&gt; /mnt/etc/fstab</code>，则 <code>/etc/fstab</code> 中应加入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/dev/(name_C)                     /home/(user_name)/C    ntfs3 defaults,uid=1000,gid=1000,nohidden,windows_names,discard 0 0</span><br><span class="line">/dev/(name_D)                     /home/(user_name)/D    ntfs3 defaults,uid=1000,gid=1000,nohidden,windows_names,discard 0 0</span><br></pre></td></tr></table></figure>
+<p>参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/fstab">fstab – Archwiki</a></p>
+<p><a target="_blank" rel="noopener" href="https://man.archlinux.org/man/mount.8">mount(8) – Arch manual pages</a></p>
+<h4 id="命令行挂载-NTFS-移动硬盘"><strong>命令行挂载 NTFS 移动硬盘</strong></h4>
+<p>首先使用 <code>lsblk</code> 查看硬盘分区 <code>/dev/(partition_name)</code>，如 <code>/dev/sda1</code></p>
+<p>之后设置挂载点，默认是在 <code>/run/media/(user_name)/</code> 下创建一个和硬盘分区名称一致的文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /run/media/(user_name)/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> ./(partition_name)</span><br></pre></td></tr></table></figure>
+<p>也可以选择 <code>/mnt</code> 作为临时挂载点</p>
+<p>再将移动硬盘挂载到新创建的文件夹，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount -t ntfs3 -o force /dev/(partition_name) /run/media/(user_name)/(partition_name)</span><br></pre></td></tr></table></figure>
+<h3 id="网络设置"><strong>网络设置</strong></h3>
+<h4 id="网络设备"><strong>网络设备</strong></h4>
+<p>在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+<p>输出网络设备名称的前两个字母表示设备种类：</p>
+<p><code>lo</code> 为回环（loopback），<code>ww</code> 为无线广域网（WWAN，负责移动宽带连接），<code>wl</code> 为无线局域网（WLAN，负责 Wi-Fi 连接），<code>en</code> 为以太网（Ethernet，负责网线连接）</p>
+<h4 id="ping-命令"><strong>ping 命令</strong></h4>
+<p>IP 地址和连接情况可以通过对域名 <code>ping</code> 得到，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping -c (count_number) (website_destination)</span><br></pre></td></tr></table></figure>
+<p>表示对网站域名 <code>(website_destination)</code> 发送 <code>(count_number)</code> 次 <code>ping</code> 连通请求</p>
+<p><strong>Linux 上的 <code>ping</code> 命令默认是不停止发送请求的，必须指定发送次数或用 <code>Ctrl+C</code> 等方式强制终止</strong></p>
+<h4 id="命令行连接-PKU-Wi-Fi"><strong>命令行连接 PKU Wi-Fi</strong></h4>
+<p>方法一：命令行输入 <code>nmtui</code> 并按照终端上的图形界面一步一步操作</p>
+<p>方法二：使用 <code>nmcli</code>，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli device wifi connect PKU</span><br></pre></td></tr></table></figure>
+<p>通用的操作是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli device wifi connect (SSID) password (student_passowrd)</span><br></pre></td></tr></table></figure>
+<p>注意这里的 SSID 是 Wi-Fi 的名称（如 PKU 或 TP-LINK_XXX），不是 IP 地址或 MAC 地址</p>
+<h4 id="命令行连接-PKU-VPN"><strong>命令行连接 PKU VPN</strong></h4>
+<p><strong>此处需要一直打开终端，故推荐使用 Yakuake</strong></p>
+<p>首先下载 <code>openconnect</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S openconnect</span><br></pre></td></tr></table></figure>
+<p>按 <code>Fn+F12</code> 打开 Yakuake，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> openconnect --protocol=nc --user (student_ID) https://vpn.pku.edu.cn</span><br></pre></td></tr></table></figure>
+<p>输入密码即可连接</p>
+<p>之后可以按 <code>Fn+F12</code> 让它收起，不要关闭窗口（关闭窗口则 VPN 断开）</p>
+<h4 id="图形化界面连接-PKU-Secure"><strong>图形化界面连接 PKU Secure</strong></h4>
+<p>首先从系统托盘中点击网络图标，再点击 PKU Secure 连接，此时会弹出一个“编辑连接”的窗口，按照以下步骤设置：</p>
+<p>Wi-Fi 安全 &gt;&gt; 安全 &gt;&gt; 企业 WPA/WPA2</p>
+<p>Wi-Fi 安全 &gt;&gt; 认证 &gt;&gt; 受保护的 EAP（PEAP）</p>
+<p>PEAP 版本 &gt;&gt; 自动</p>
+<p>内部认证 &gt;&gt; MSCHAPv2</p>
+<p>输入用户名、密码即可连接</p>
+<h4 id="命令行连接-PKU-Secure"><strong>命令行连接 PKU Secure</strong></h4>
+<p>首先进入 <code>nmcli</code> 配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection edit <span class="string">&quot;PKU Secure&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在 <code>nmcli</code> 界面内输入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">set wifi-sec.key-mgmt wpa-eap</span><br><span class="line">set ipv4.method auto</span><br><span class="line">set 802-1x.eap peap</span><br><span class="line">set 802-1x.phase2-auth mschapv2</span><br><span class="line">set 802-1x.identity (student_ID)</span><br><span class="line">set 802-1x.password (student_password)</span><br><span class="line">save</span><br><span class="line">activate</span><br></pre></td></tr></table></figure>
+<h4 id="ThinkPad：图形化界面设置移动宽带网络"><strong>ThinkPad：图形化界面设置移动宽带网络</strong></h4>
+<p>下载 <code>modemmanager</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S modemmanager</span><br></pre></td></tr></table></figure>
+<p>启用 ModemManager：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now ModemManager</span><br></pre></td></tr></table></figure>
+<p>此时 Plasma 系统托盘的网络设置会多出一个移动宽带的图标选项</p>
+<p>在“系统设置 &gt;&gt; WiFi 和网络”中，点击右下角的加号创建新的链接，选择“移动宽带”并创建，按照以下步骤设置：</p>
+<p>设置移动宽带连接 &gt;&gt; 任何 GSM 设备</p>
+<p>国家 &gt;&gt; 中国</p>
+<p>提供商 &gt;&gt; China Unicom</p>
+<p>选择您的资费方案 &gt;&gt; 没有列出我的资费方案</p>
+<p>APN &gt;&gt; <code>bjlenovo12.njm2apn</code></p>
+<p>保存即可激活</p>
+<p><strong>提供商和 APN 可以在 Windows 系统的“设置 &gt;&gt; 网络和 Internet &gt;&gt; 手机网络 &gt;&gt; 运营商设置”上查找到，在“活动网络”处能找到提供商，在“Internet APN &gt;&gt; 默认接入点 &gt;&gt; 视图”中可以找到 APN 地址</strong></p>
+<h4 id="修改-hosts-文件访问-GitHub"><strong>修改 hosts 文件访问 GitHub</strong></h4>
+<p>修改 hosts 文件可以有效访问 GitHub，需要修改的文件是 <code>/etc/hosts</code>，Windows 下对应的文件位置为： <code>C:\Windows\System32\drivers\etc\hosts</code> （注意这里是反斜杠），修改内容参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.hellogithub.com/hosts">HelloGitHub – hosts</a></p>
+<p>可以用下面命令修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;sed -i &quot;/# GitHub520 Host Start/Q&quot; /etc/hosts &amp;&amp; curl https://raw.hellogithub.com/hosts &gt;&gt; /etc/hosts&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="不显示回环连接"><strong>不显示回环连接</strong></h4>
+<p>如果在 Plasma 系统托盘的网络设置中发现一个名为 <code>lo</code> 的连接，这是系统的回环连接</p>
+<p>不显示回环连接可以编辑 <code>/etc/NetworkManager/NetworkManager.conf</code>，添加如下内容：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[keyfile]</span><br><span class="line">unmanaged-devices=interface-name:lo</span><br></pre></td></tr></table></figure>
+<p>之后重启网络服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart NetworkManager</span><br></pre></td></tr></table></figure>
+<h3 id="Vim-配置"><strong>Vim 配置</strong></h3>
+<p>Vim 的配置文件主要有 <code>/usr/share/vim/vimfiles/archlinux.vim</code>，<code>/etc/vimrc</code> 和 <code>/home/(user_name)/.vimrc</code>，建议直接修改 <code>/etc/vimrc</code>，这样不会覆盖 <code>/usr/share/vim/vimfiles/archlinux.vim</code> 上定义的默认配置（语法高亮等）</p>
+<p>Vim 的配置可以参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="http://vimdoc.sourceforge.net/htmldoc/options.html">Options – Vim Documentation</a></p>
+<p>应用 <code>Ctrl+C</code>、<code>Ctrl+V</code>、<code>Ctrl+A</code>、<code>Ctrl+Z</code> 等快捷键，需要在 <code>/etc/vimrc</code> 中写入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source $VIMRUNTIME/mswin.vim</span><br></pre></td></tr></table></figure>
+<p><code>mswin.vim</code> 的源代码可以在这里找到：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim/vim/blob/master/runtime/mswin.vim">vim – mswin.vim</a></p>
+<p>启用剪贴板功能，需要安装 <code>gvim</code> 软件包</p>
+<h3 id="GNU-nano-下载与配置"><strong>GNU nano 下载与配置</strong></h3>
+<p>下载 nano 文本编辑器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S nano</span><br></pre></td></tr></table></figure>
+<p>nano 的配置文件在 <code>/etc/nanorc</code>，可以通过取消注释设置选项配置文件，如：</p>
+<p>取消注释 <code>set linenumbers</code> 可以显示行号</p>
+<p>取消注释 <code>set tabsize 8</code> 可以更改 Tab 键的长度，例如 <code>set tabsize 4</code></p>
+<p>取消注释 <code>set tabstospaces</code> 可以将 Tab 转换为空格</p>
+<p>取消注释 <code>set matchbrackets &quot;(&lt;[{)&gt;]}&quot;</code> 可以匹配括号</p>
+<p>取消注释 <code>include &quot;/usr/share/nano/*.nanorc&quot;</code> 一行和所有的颜色设置可以启用代码高亮</p>
+<p>取消注释所有的 <code>Key bindings</code> 选项可以启用更常用的快捷键设定</p>
+<p><strong>用 nano 编辑后保存的步骤是 <code>Ctrl+W</code> （Write Out） &gt;&gt; <code>Enter</code> &gt;&gt; <code>Ctrl+Q</code> （Exit），如果用默认的快捷键设置，则为 <code>Ctrl+O</code> （Write Out） &gt;&gt; <code>Enter</code> &gt;&gt; <code>Ctrl+X</code> （Exit）</strong></p>
+<h3 id="命令行界面输出语言为英语"><strong>命令行界面输出语言为英语</strong></h3>
+<p>在 <code>~/.bashrc</code> 中添加：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LC_ALL=en_US.UTF-8</span><br><span class="line">export LANGUAGE=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<h3 id="时间设置"><strong>时间设置</strong></h3>
+<h4 id="双系统时间不同步"><strong>双系统时间不同步</strong></h4>
+<p>系统设置 &gt;&gt; 时间和日期 &gt;&gt; 自动设置日期和时间</p>
+<p>在 Arch Linux 上设置硬件时间为 UTC：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> timedatectl set-local-rtc 0</span><br></pre></td></tr></table></figure>
+<p>并在 Windows 上设置硬件时间为 UTC，与 Arch Linux 同步：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add <span class="string">&quot;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&quot;</span> /v RealTimeIsUniversal /d <span class="number">1</span> /t REG_QWORD /f</span><br></pre></td></tr></table></figure>
+<p><strong>这一步需要在 Powershell（管理员）中执行</strong></p>
+<h4 id="数字时钟设置-24-小时制"><strong>数字时钟设置 24 小时制</strong></h4>
+<p>右键点击“数字时钟” &gt;&gt; 配置数字时钟 &gt;&gt; 时间显示 &gt;&gt; 24 小时制</p>
+<h4 id="添加-TUNA-网络授时服务（可选）"><strong>添加 TUNA 网络授时服务（可选）</strong></h4>
+<p>参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://tuna.moe/help/ntp/">TUNA NTP（网络授时）服务使用说明</a></p>
+<h3 id="字体安装"><strong>字体安装</strong></h3>
+<p>KDE Plasma 支持直接在 Dolphin 的右键菜单中安装 TTF/OTF 字体和 TTC/OTC 字体集</p>
+<p><strong>注意不管是 Windows 还是 Linux 都要将字体“为所有用户安装”，尤其是 Windows 11 右键直接安装是安装到个人用户目录 <code>C:\Users\(user_name)\AppData\Local\Microsoft\Windows\Fonts</code> 而非系统目录 <code>C:\Windows\Fonts</code></strong></p>
+<h4 id="命令行安装字体"><strong>命令行安装字体</strong></h4>
+<p>将字体文件复制到 <code>/usr/share/fonts</code> 安装，方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> (font-path)/* /usr/share/fonts</span><br><span class="line"><span class="built_in">cd</span> /usr/share/fonts</span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure>
+<p>这样就可以安装字体了</p>
+<p><strong>微软系统字体文件夹在 <code>C:\Windows\Fonts</code>，可以复制到 <code>/usr/share/fonts</code> 安装，注意需要排除掉 MS Gothic、Yu Gothic 和 Malgun Gothic 字体，因它们只有部分日/韩文汉字字形（与中文汉字字形一样的会被排除，最后导致部分中文汉字显示为日/韩文字形）</strong></p>
+<p><strong>注意 Microsoft Office 不支持嵌入 OTF 字体，只能嵌入 TTF 字体</strong></p>
+<h4 id="安装中文字体"><strong>安装中文字体</strong></h4>
+<p>推荐安装<a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-sans">思源黑体</a>、<a target="_blank" rel="noopener" href="https://github.com/adobe-fonts/source-han-serif">思源宋体</a></p>
+<p>命令行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts</span><br></pre></td></tr></table></figure>
+<p>并创建字体设置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/fonts/conf.d/64-language-selector-prefer.conf</span><br></pre></td></tr></table></figure>
+<p>加入以下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">fontconfig</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;fonts.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">fontconfig</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>sans-serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Source Han Sans CN<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>serif<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Source Han Serif CN<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">alias</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">family</span>&gt;</span>monospace<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">prefer</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">family</span>&gt;</span>Source Han Sans CN<span class="tag">&lt;/<span class="name">family</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">prefer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">alias</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fontconfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保存退出，重启电脑即可</p>
+<h3 id="安装中文输入法"><strong>安装中文输入法</strong></h3>
+<h4 id="安装-Fcitx5-输入法"><strong>安装 Fcitx5 输入法</strong></h4>
+<p>推荐使用 Fcitx5 输入法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S fcitx5-im fcitx5-chinese-addons</span><br></pre></td></tr></table></figure>
+<p>编辑 <code>/etc/environment</code> 并添加以下几行：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br></pre></td></tr></table></figure>
+<p>然后重新登录，此时输入法会自动启动，默认的切换键是 <code>Ctrl+Space</code></p>
+<p><strong>安装输入法之后需要重启电脑才能生效，如果无法启动输入法，在“系统设置 &gt;&gt; 输入法 &gt;&gt; 添加输入法”中手动添加“拼音”</strong></p>
+<h4 id="配置与词库"><strong>配置与词库</strong></h4>
+<p>Fcitx5 的配置在：</p>
+<p>系统设置 &gt;&gt; 输入法</p>
+<p>注意有“全局选项”、“附加组件”、“拼音”三个配置区域</p>
+<p>可以添加词库：（部分包需要使用 AUR 源）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S fcitx5-pinyin-zhwiki fcitx5-pinyin-custom-pinyin-dictionary fcitx5-pinyin-moegirl</span><br></pre></td></tr></table></figure>
+<p>虚拟键盘的配置在：</p>
+<p>系统设置 &gt;&gt; 键盘 &gt;&gt; 虚拟键盘 &gt;&gt; 选择 Fcitx5</p>
+<h4 id="其它版本"><strong>其它版本</strong></h4>
+<p>Fcitx5 对应的 git 版本为：（需要使用 AUR 源）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S fcitx5-git fcitx5-chinese-addons-git fcitx5-gtk-git fcitx5-qt5-git fcitx5-configtool-git</span><br></pre></td></tr></table></figure>
+<p>一个稳定的替代版本是 Fcitx 4：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S fcitx-im fcitx-configtool fcitx-cloudpinyin</span><br></pre></td></tr></table></figure>
+<p>可以配合 googlepinyin 或 sunpinyin 使用，即执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">paru -S fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S fcitx-sunpinyin</span><br></pre></td></tr></table></figure>
+<p>也可以用 <code>sudo pacman -S sunpinyin</code> 安装 Sunpinyin</p>
+<h3 id="安装-Firefox-的中文语言包"><strong>安装 Firefox 的中文语言包</strong></h3>
+<p>Firefox 浏览器的中文语言包可以在官方仓库中下载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S firefox-i18n-zh-cn</span><br></pre></td></tr></table></figure>
+<h3 id="关闭启动和关机时的系统信息"><strong>关闭启动和关机时的系统信息</strong></h3>
+<p>修改 <code>/etc/grub.d/10_linux</code>，删除 <code>message=&quot;$(gettext_printf &quot;Loading Linux %s ...&quot; ${version})&quot;</code> 和 <code>message=&quot;$(gettext_printf &quot;Loading initial ramdisk ...&quot;)&quot;</code> 两行</p>
+<p>然后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="在登录时自动解锁-KWallet"><strong>在登录时自动解锁 KWallet</strong></h3>
+<p>在登录时自动解锁 KWallet 需要安装 <code>kwallet-pam</code> 包来提供对 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PAM">PAM</a> 的兼容模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S kwallet-pam</span><br></pre></td></tr></table></figure>
+<p>自动解锁的条件：</p>
+<ul>
+<li>KWallet 必须使用 blowfish 加密方式</li>
+<li>所选择的 KWallet 密码必须与当前用户的密码相同</li>
+<li>要自动解锁的密码库必须要命名为默认的 kdewallet，任何其他名字的密码库都不会自动解锁</li>
+</ul>
+<h3 id="Git-配置"><strong>Git 配置</strong></h3>
+<p>配置用户名、邮箱：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name (user_name)</span><br><span class="line">git config --global user.email (user_email)</span><br></pre></td></tr></table></figure>
+<p>Git 使用教程参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/docs">Git Documentation</a></p>
+<h3 id="NTFS-磁盘无法挂载"><strong>NTFS 磁盘无法挂载</strong></h3>
+<p>一般来讲是该磁盘未正确卸载（如热插拔）、Windows 开启了快速启动，或者进行了优化磁盘等操作导致的，此时 NTFS 分区会被标记为 <code>dirty</code></p>
+<p>可以尝试强制挂载，需要加上 <code>force</code> 选项，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount -t ntfs3 -o force /dev/(partition_name) /run/media/(user_name)/(partition_name)</span><br></pre></td></tr></table></figure>
+<p>临时解决这个问题需要下载 AUR 软件包 <code>ntfsprogs-ntfs3</code> 以执行硬盘 NTFS 分区修复：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">paru -S ntfsprogs-ntfs3</span><br><span class="line"><span class="built_in">sudo</span> ntfsfix -d /dev/(partition_name)</span><br></pre></td></tr></table></figure>
+<p>再重新挂载即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mount -t ntfs3 /dev/(partition_name) /run/media/(user_name)/(partition_name)</span><br></pre></td></tr></table></figure>
+<p>根本的解决方案是在 Windows 中使用 <code>chkdsk</code> 修复，注意这里要使用盘符，以 <code>E:</code> 盘为例：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkdsk /F E:</span><br></pre></td></tr></table></figure>
+<h3 id="系统分区改变导致时进入-GRUB-Rescue-模式"><strong>系统分区改变导致时进入 GRUB Rescue 模式</strong></h3>
+<p>此时会在开机时显示如下内容而无法进入选择系统的界面：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: no such partition.</span><br><span class="line">Entering rescue mode...</span><br><span class="line">grub rescue&gt;</span><br></pre></td></tr></table></figure>
+<p>此时执行 <code>ls</code>，显示如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((hd_number)) ((hd_number),(gpt_number))</span><br></pre></td></tr></table></figure>
+<p>其中硬盘编号 <code>(hd_number)</code> 从小到大排列（最小值为 0），分区编号 <code>(gpt_number)</code> 从大到小排列（最小值为 1）</p>
+<p>找到安装 Arch Linux 的分区 <code>((hd_number),(gpt_number))</code>，此时执行 <code>ls((hd_number),(gpt_number))</code> 应该能看到 Arch Linux 根目录下的所有文件和文件夹</p>
+<p>手动修改启动分区所在的位置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> prefix=((hd_number),(gpt_number))/boot/grub</span><br></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insmod normal</span><br><span class="line">normal</span><br></pre></td></tr></table></figure>
+<p>即可进入 GRUB 界面，从这里登录 Arch Linux 系统，登录后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>以修复启动项</p>
+<h3 id="从-USB-启动盘启动"><strong>从 USB 启动盘启动</strong></h3>
+<p>如果计算机无法启动，可以尝试从 USB 启动盘启动以修复电脑</p>
+<p>首先根据“刻录 USB 启动盘”一节中的内容创建一个 USB 启动盘</p>
+<p>之后在 UEFI 中设置从 USB 启动</p>
+<p>启动后需要挂载电脑上 Arch Linux 的分区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/(root_partition) /mnt</span><br><span class="line">mount --<span class="built_in">mkdir</span> /dev/(efi_system_partition) /mnt/boot</span><br></pre></td></tr></table></figure>
+<p>更改根目录到已安装的系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<p>这样就可以在已安装的系统中更改文件设置等以正常启动</p>
+<p>退出时，输入 <code>exit</code> 退出 <code>chroot</code> 环境，输入 <code>umount -R /mnt</code> 手动卸载被挂载的分区，最后执行 <code>reboot</code> 重启系统</p>
+<h3 id="调整文件夹名称为英文"><strong>调整文件夹名称为英文</strong></h3>
+<p>修改 <code>~/.config/user-dirs.dirs</code>，改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XDG_DESKTOP_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Desktop&quot;</span></span><br><span class="line">XDG_DOCUMENTS_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Documents&quot;</span></span><br><span class="line">XDG_DOWNLOAD_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Downloads&quot;</span></span><br><span class="line">XDG_MUSIC_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Music&quot;</span></span><br><span class="line">XDG_PICTURES_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Pictures&quot;</span></span><br><span class="line">XDG_PUBLICSHARE_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Public&quot;</span></span><br><span class="line">XDG_TEMPLATES_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Templates&quot;</span></span><br><span class="line">XDG_VIDEOS_DIR=<span class="string">&quot;<span class="variable">$HOME</span>/Videos&quot;</span></span><br></pre></td></tr></table></figure>
+<p>并在 Dolphin 中按照上面的说明更改文件名</p>
+<h3 id="蓝牙连接设置"><strong>蓝牙连接设置</strong></h3>
+<h4 id="命令行连接蓝牙"><strong>命令行连接蓝牙</strong></h4>
+<p>一般蓝牙设备可以在 Plasma 桌面的图形界面下连接，如果连接失败，可以选择用命令行界面连接和排查错误</p>
+<p>首先要安装 <code>bluez-utils</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S bluez-utils</span><br></pre></td></tr></table></figure>
+<p>在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bluetoothctl</span><br></pre></td></tr></table></figure>
+<p>进入交互模式，此时命令前缀变为 <code>[bluetooth]#</code>（<code>bluetooth</code> 可能替换为已连接设备的名字），连接步骤如下：</p>
+<ul>
+<li>使用命令 <code>scan on</code> 去搜索发现所有可配对的设备，找到要配对的设备的 MAC 地址 <code>(MAC_address)</code>，一般是 <code>XX:XX:XX:XX:XX:XX</code> 的形式</li>
+<li>使用命令 <code>pair (MAC_address)</code> 配对设备，可能需要输入 PIN 密码</li>
+<li>使用命令 <code>trust (MAC_address)</code> 将设备添加到信任列表</li>
+<li>使用命令 <code>connect (MAC_address)</code> 建立连接</li>
+<li>使用命令 <code>exit</code> 退出</li>
+</ul>
+<h4 id="SONY-WH-1000XM3-耳机的蓝牙连接"><strong>SONY WH-1000XM3 耳机的蓝牙连接</strong></h4>
+<p>长按耳机电源键约 7 秒即可进入配对模式，可以在蓝牙中配对</p>
+<h4 id="Logitech-多设备鼠标的蓝牙连接"><strong>Logitech 多设备鼠标的蓝牙连接</strong></h4>
+<p>同一台电脑的 Windows 系统和 Linux 系统在鼠标上会被识别为两个设备</p>
+<p>如果 Windows 系统被识别为设备 1，需要多设备切换的按钮（一般是一个在滚轮后或鼠标底部的圆形按钮）切换至设备 2</p>
+<p>长按圆形按钮直到灯 2 快速闪烁进入配对模式，可以在蓝牙中配对</p>
+<p>如果 Logitech 鼠标配对后屏幕光标无法移动，一般可以直接删除设备重新配对，如果仍然失败则按照“命令行连接蓝牙”一节操作</p>
+<h3 id="解决登录-Root-用户没有声音的问题"><strong>解决登录 Root 用户没有声音的问题</strong></h3>
+<p>首先创建一个新文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /root/.config/autostart/</span><br></pre></td></tr></table></figure>
+<p>在该文件夹下创建一个 <code>pulseaudio.desktop</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /root/.config/autostart/pulseaudio.desktop</span><br></pre></td></tr></table></figure>
+<p>写入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Type=Application</span><br><span class="line">Name=pulseaudio</span><br><span class="line">Exec=pulseaudio --start --log-target=syslog</span><br><span class="line">StartupNotify=<span class="literal">false</span></span><br><span class="line">Terminal=<span class="literal">true</span></span><br><span class="line">Hidden=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>保存，重启即可</p>
+<h3 id="解决-Gwenview-无法打开大型图片的问题"><strong>解决 Gwenview 无法打开大型图片的问题</strong></h3>
+<p>在应用程序启动器中找到 Gwenview，右键点击，选择“编辑应用程序”</p>
+<p>找到“应用程序”，编辑环境变量，加入 <code>QT_IMAGEIO_MAXALLOC=(size)</code></p>
+<p>默认值是 256，无法打开大型图片时要将其改成更大的值，如 65536</p>
+<h3 id="切换图形化界面和命令行界面"><strong>切换图形化界面和命令行界面</strong></h3>
+<p>登录时默认进入的是图形化界面，有时候开机后黑屏是图形化界面显示不出来所致，此时可以按快捷键 <code>Ctrl+Alt+Fn+(F2~F6)</code> 进入 <code>tty2 ~ tty6</code> 的任何一个命令行 TTY 界面</p>
+<p>注意此时需要手动输入用户名和密码</p>
+<p>在命令行界面解决问题后，按快捷键 <code>Ctrl+Alt+Fn+F1</code> 可以转换回 TTY1 图形化界面</p>
+<h3 id="电源管理方案"><strong>电源管理方案</strong></h3>
+<h4 id="使用图形界面"><strong>使用图形界面</strong></h4>
+<p>这需要使用 <code>powerdevil</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S powerdevil</span><br></pre></td></tr></table></figure>
+<p>之后即可在“系统设置 &gt;&gt; 系统 &gt;&gt; 电源管理”中设置电源方案</p>
+<h4 id="使用命令行工具"><strong>使用命令行工具</strong></h4>
+<p>这需要 <code>tlp</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S tlp</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> tlp</span><br></pre></td></tr></table></figure>
+<p>tlp 的设置文件在 <code>/etc/tlp.conf</code></p>
+<p>若需要更改 CPU 性能设置，修改以下位置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPU_MIN_PERF_ON_AC=0</span><br><span class="line">CPU_MAX_PERF_ON_AC=100</span><br><span class="line">CPU_MIN_PERF_ON_BAT=0</span><br><span class="line">CPU_MAX_PERF_ON_BAT=30</span><br></pre></td></tr></table></figure>
+<p>若需要更改 CPU 睿频设置，修改以下位置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CPU_BOOST_ON_AC=1</span><br><span class="line">CPU_BOOST_ON_BAT=0</span><br></pre></td></tr></table></figure>
+<p>保存、关闭，在终端中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> tlp start</span><br></pre></td></tr></table></figure>
+<p><strong>不需要高性能的时候可以关闭睿频，这样可以大幅增加续航、减少发热</strong></p>
+<h3 id="NVIDIA-显卡"><strong>NVIDIA 显卡</strong></h3>
+<p>如果电脑使用了 NVIDIA 独立显卡，需要根据显卡型号下载对应的驱动程序，参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/NVIDIA">NVIDIA – ArchWiki</a></p>
+<p>对于较新的 RTX 系列显卡，推荐使用 <code>nvidia-open</code> 软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S nvidia-open</span><br></pre></td></tr></table></figure>
+<p>下一步是编辑 <code>/etc/default/grub</code>，在 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 一行中添加 <code>nvidia_drm.modeset=1 nvidia_drm.fbdev=1</code></p>
+<p>更新 GRUB：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>之后编辑 <code>/etc/mkinitcpio.conf</code>，在 <code>MODULES</code> 一行的括号中添加 <code>nvidia nvidia_modeset nvidia_uvm nvidia_drm</code>，在 <code>HOOKS</code> 一行的括号中删除 <code>kms</code> 一项</p>
+<p>重新生成 initramfs：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mkinitcpio -P</span><br></pre></td></tr></table></figure>
+<p>最后在 <code>/etc/pacman.d/</code> 中建立 <code>hooks</code> 文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/pacman.d/hooks/</span><br></pre></td></tr></table></figure>
+<p>之后创建一个 <code>nvidia.hook</code> 文件，写入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Trigger]</span><br><span class="line">Operation=Install</span><br><span class="line">Operation=Upgrade</span><br><span class="line">Operation=Remove</span><br><span class="line">Type=Package</span><br><span class="line"># Uncomment the installed NVIDIA package</span><br><span class="line">Target=nvidia-open</span><br><span class="line">#Target=nvidia</span><br><span class="line">#Target=nvidia-lts</span><br><span class="line"># If running a different kernel, modify below to match</span><br><span class="line">Target=linux</span><br><span class="line"></span><br><span class="line">[Action]</span><br><span class="line">Description=Updating NVIDIA module in initcpio</span><br><span class="line">Depends=mkinitcpio</span><br><span class="line">When=PostTransaction</span><br><span class="line">NeedsTargets</span><br><span class="line">Exec=/bin/sh -c &#x27;while read -r trg; do case $trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P&#x27;</span><br></pre></td></tr></table></figure>
+<p>即可重启电脑</p>
+<h3 id="切换软件包仓库"><strong>切换软件包仓库</strong></h3>
+<p>参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Official_repositories">Official repositories – ArchWiki</a></p>
+<h4 id="启用-multilib-仓库（可选）"><strong>启用 multilib 仓库（可选）</strong></h4>
+<p>multilib 包含着 32 位的软件和链接库，可以用于在 64 位系统上运行和构建 32 位软件，例如 <code>wine</code> 软件包等</p>
+<p>如果想启用 multilib 仓库，请在 <code>/etc/pacman.conf</code> 文件中取消 <code>[multilib]</code> 段落的注释：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[multilib]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>然后更新系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+<h4 id="启用测试仓库（可选）"><strong>启用测试仓库（可选）</strong></h4>
+<p><strong>测试仓库并不是“最新”软件包的仓库，测试仓库的目的是提供一个即将被放入主软件仓库的软件包的集散地</strong></p>
+<p>若要启用测试仓库，请同时启用 core-testing 和 extra-testing 仓库，即在 <code>/etc/pacman.conf</code> 文件中取消 <code>[core-testing]</code> 和 <code>[extra-testing]</code> 段落的注释：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[core-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[extra-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>由于并不是所有的主仓库软件包都在测试仓库中有相应的版本，core 和 extra 主仓库应该保留，并保证相应的测试仓库在主仓库的前面，即：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[core-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[core]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[extra-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[extra]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<h4 id="启用-kde-unstable-仓库（可选）"><strong>启用 kde-unstable 仓库（可选）</strong></h4>
+<p>kde-unstable 仓库包含包含 KDE Plasma 和应用程序的测试版本</p>
+<p>如果想启用 kde-unstable 仓库，请在 <code>/etc/pacman.conf</code> 文件中添加：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[kde-unstable]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>此时应该启用 core-testing 和 extra-testing 仓库，并保证 <code>[kde-unstable]</code> 在其它所有仓库的前面，即：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[kde-unstable]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[core-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[core]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[extra-testing]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br><span class="line"></span><br><span class="line">[extra]</span><br><span class="line">Include = /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>然后更新系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -Syu</span><br></pre></td></tr></table></figure>
+<h3 id="切换到其它内核（可选）"><strong>切换到其它内核（可选）</strong></h3>
+<p>Arch Linux 和 AUR 上可选的内核可以参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Kernel">Kernel – ArchWiki</a></p>
+<p>以 <code>linux-lts</code> 为例，首先下载 <code>linux-lts</code> 内核：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S linux-lts</span><br></pre></td></tr></table></figure>
+<p>可以选择保留或删除原有内核，若保留内核，重启后可以选择从任何一个内核启动</p>
+<p>之后重新生成 GRUB 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p><strong>如果不重新生成 GRUB 文件会因为找不到内核而无法启动</strong></p>
+<h3 id="应用程序的快捷键配置（可选）"><strong>应用程序的快捷键配置（可选）</strong></h3>
+<p>应用程序的快捷键配置在：</p>
+<p>系统设置 &gt;&gt; 键盘 &gt;&gt; 快捷键</p>
+<p>若没有想要的应用程序，可以点击“新增”</p>
+<h3 id="添加打印机（可选）"><strong>添加打印机（可选）</strong></h3>
+<p>需要下载 <code>system-config-printer</code> 和 <code>cups</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S system-config-printer cups</span><br></pre></td></tr></table></figure>
+<p>并启用 <code>cups</code> 服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> --now cups</span><br></pre></td></tr></table></figure>
+<p>此时在“系统设置 &gt;&gt; 已连接的设备 &gt;&gt; 打印机”中添加打印机</p>
+<p>如果无法自动发现，需要选择“手动配置”，输入打印机的 IPP 地址如：（注意不要遗漏中间的 <code>://</code>）</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipp://xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>再选择打印机的制造商和型号，即可添加打印机，添加后可以打印测试页或自检页确认是否添加成功</p>
+<h3 id="Intel-硬件视频加速（可选）"><strong>Intel 硬件视频加速（可选）</strong></h3>
+<p>如果想要获得硬件视频加速，可以下载 <code>intel-media-driver</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S intel-media-driver</span><br></pre></td></tr></table></figure>
+<p>具体教程参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Hardware_video_acceleration">Hardware video acceleration – ArchWiki</a></p>
+<h3 id="为-pacman-启用多线程下载（可选）"><strong>为 pacman 启用多线程下载（可选）</strong></h3>
+<p>执行下面的命令下载 <a target="_blank" rel="noopener" href="https://github.com/axel-download-accelerator/axel">axel</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S axel</span><br></pre></td></tr></table></figure>
+<p>编辑 <code>/etc/pacman.conf</code> 文件，取消注释 <code>XferCommand</code> 一行，并改为：（这里的 16 可以换成其它数字）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XferCommand = /usr/bin/axel -n 16 -o %o %u</span><br></pre></td></tr></table></figure>
+<p>编辑 <code>/etc/makepkg.conf</code> 文件，修改 <code>DLAGENTS</code> 一段为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DLAGENTS=(<span class="string">&#x27;file::/usr/bin/axel -n 16 -o %o %u&#x27;</span></span><br><span class="line"><span class="string">&#x27;ftp::/usr/bin/axel -n 16 -o %o %u&#x27;</span></span><br><span class="line"><span class="string">&#x27;http::/usr/bin/axel -n 16 -o %o %u&#x27;</span></span><br><span class="line"><span class="string">&#x27;https::/usr/bin/axel -n 16 -o %o %u&#x27;</span></span><br><span class="line"><span class="string">&#x27;rsync::/usr/bin/rsync --no-motd -z %u %o&#x27;</span></span><br><span class="line"><span class="string">&#x27;scp::/usr/bin/scp -C %u %o&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>注意某些软件包如 <code>rider</code> 和 <code>qqmusic-bin</code> 等下载源不支持 axel，启用多线程下载后可能会导致构建失败</strong></p>
+<h3 id="建立交换文件（可选）"><strong>建立交换文件（可选）</strong></h3>
+<p>相比于使用一个磁盘分区作为交换空间，使用交换文件可以更方便地随时调整大小或者移除，当磁盘空间有限时，使用交换文件更加理想</p>
+<p>可以使用 <code>mkswap</code> 命令建立交换文件，交换文件的大小推荐为与内存大小相等，此处以 16GiB 为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mkswap -U clear -s 16G -F /swapfile</span><br></pre></td></tr></table></figure>
+<p>激活交换文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> swapon /swapfile</span><br></pre></td></tr></table></figure>
+<p>最后在 <code>/etc/fstab</code> 中加入交换文件的条目：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/swapfile none swap defaults 0 0</span><br></pre></td></tr></table></figure>
+<p>现在输入 <code>free -h</code> 即可在 <code>Swap</code> 一行查看交换文件的使用情况</p>
+<p>如果要删除交换文件，必须先关闭交换文件的使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> swapoff /swapfile</span><br></pre></td></tr></table></figure>
+<p>再删除文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> -f /swapfile</span><br></pre></td></tr></table></figure>
+<p><strong>对于 BTRFS 文件系统，建立交换文件的命令有一些不同，参见 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Btrfs#Swap_file">BTRFS Swap File – ArchWiki</a></strong></p>
+<h3 id="重新开启-Secure-Boot（未测试）"><strong>重新开启 Secure Boot（未测试）</strong></h3>
+<p>如果想在开启 Secure Boot 的情况下登录进 Arch Linux，可以使用经过微软签名的 PreLoader 或者 shim，然后在 UEFI 设置中将 Secure Boot 级别设置为 Microsoft &amp; 3rd Party CA</p>
+<p>具体教程参考以下网址：</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Unified_Extensible_Firmware_Interface/Secure_Boot#Microsoft_Windows">Secure Boot – ArchWiki</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.firestar-reimu.top">Firestar</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.firestar-reimu.top/Arch-Linux-Installation/">https://blog.firestar-reimu.top/Arch-Linux-Installation/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.firestar-reimu.top" target="_blank">Firestar 的幻想乡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/Hello-World/" title="Hello World"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/PKU_peach_blossom.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">搭建 GitHub Pages + Hexo + Butterfly 博客的笔记</div></div></div></a><a class="pagination-related" href="/Time-Calculator/" title="时间计算器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/time.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">时间计算器</div></div><div class="info-2"><div class="info-item-1">时间计算器</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Firestar</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Firestar-Reimu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Firestar-Reimu" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:zhangzj@nao.cas.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-Arch-Linux-%E7%B3%BB%E7%BB%9F-ISO-%E9%95%9C%E5%83%8F"><span class="toc-number">1.1.</span> <span class="toc-text">下载 Arch Linux 系统 ISO 镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Arch-Linux-%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.1.1.</span> <span class="toc-text">Arch Linux 官网下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E7%BD%91%E7%AB%99%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.1.2.</span> <span class="toc-text">镜像网站下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%88%B6%E4%BD%9C-ISO-%E9%95%9C%E5%83%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">本地制作 ISO 镜像</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA-Linux-%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA"><span class="toc-number">1.2.</span> <span class="toc-text">为 Linux 系统分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">关闭快速启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD-Secure-Boot"><span class="toc-number">1.4.</span> <span class="toc-text">关闭 Secure Boot</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5-UEFI-BIOS-%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text">进入 UEFI&#x2F;BIOS 设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD-Secure-Boot-2"><span class="toc-number">1.4.2.</span> <span class="toc-text">关闭 Secure Boot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E4%BD%99%E7%9A%84-Windows-%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="toc-number">1.5.</span> <span class="toc-text">删除多余的 Windows 启动项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%BB%E5%BD%95-USB-%E5%90%AF%E5%8A%A8%E7%9B%98"><span class="toc-number">1.6.</span> <span class="toc-text">刻录 USB 启动盘</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-%E7%B3%BB%E7%BB%9F%E6%96%B9%E6%A1%88"><span class="toc-number">1.6.1.</span> <span class="toc-text">Windows 系统方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-%E7%B3%BB%E7%BB%9F%E6%96%B9%E6%A1%88"><span class="toc-number">1.6.2.</span> <span class="toc-text">Linux 系统方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88"><span class="toc-number">1.6.3.</span> <span class="toc-text">跨平台方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E-USB-%E5%90%AF%E5%8A%A8"><span class="toc-number">1.7.</span> <span class="toc-text">从 USB 启动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8-Windows-%E4%B8%AD%E8%AE%BE%E7%BD%AE%E4%BB%8E-USB-%E5%90%AF%E5%8A%A8"><span class="toc-number">1.7.1.</span> <span class="toc-text">在 Windows 中设置从 USB 启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8-UEFI-%E4%B8%AD%E8%AE%BE%E7%BD%AE%E4%BB%8E-USB-%E5%90%AF%E5%8A%A8"><span class="toc-number">1.7.2.</span> <span class="toc-text">在 UEFI 中设置从 USB 启动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">安装系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-number">2.1.</span> <span class="toc-text">连接到互联网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4"><span class="toc-number">2.2.</span> <span class="toc-text">更新系统时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA"><span class="toc-number">2.3.</span> <span class="toc-text">建立硬盘分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.4.</span> <span class="toc-text">创建文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA"><span class="toc-number">2.5.</span> <span class="toc-text">挂载分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">2.6.</span> <span class="toc-text">选择镜像源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%BF%85%E9%9C%80%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">2.7.</span> <span class="toc-text">安装必需的软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90-fstab-%E6%96%87%E4%BB%B6"><span class="toc-number">2.8.</span> <span class="toc-text">生成 fstab 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E6%96%B0%E7%9A%84-Archlinux-%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.9.</span> <span class="toc-text">进入新的 Archlinux 系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%8C%BA"><span class="toc-number">2.10.</span> <span class="toc-text">时区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%8C%96"><span class="toc-number">2.11.</span> <span class="toc-text">本地化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-number">2.12.</span> <span class="toc-text">网络配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-initramfs"><span class="toc-number">2.13.</span> <span class="toc-text">创建 initramfs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">2.14.</span> <span class="toc-text">Root 用户密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.15.</span> <span class="toc-text">安装引导程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF"><span class="toc-number">2.16.</span> <span class="toc-text">重启</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">初始配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">3.1.</span> <span class="toc-text">连接网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">3.2.</span> <span class="toc-text">设置新用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sudo-%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">sudo 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%BA-Vim"><span class="toc-number">3.3.1.</span> <span class="toc-text">更改默认编辑器为 Vim</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E6%8E%88%E6%9D%83"><span class="toc-number">3.3.2.</span> <span class="toc-text">用户组授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E7%94%A8%E6%88%B7%E5%85%8D%E5%AF%86%E7%A0%81"><span class="toc-number">3.3.3.</span> <span class="toc-text">单个用户免密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E7%94%A8%E8%93%9D%E7%89%99"><span class="toc-number">3.4.</span> <span class="toc-text">安装并启用蓝牙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KDE-Plasma-%E6%A1%8C%E9%9D%A2%E5%AE%89%E8%A3%85"><span class="toc-number">3.5.</span> <span class="toc-text">KDE Plasma 桌面安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Wayland-%E5%92%8C-SDDM"><span class="toc-number">3.5.1.</span> <span class="toc-text">安装 Wayland 和 SDDM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8-SDDM"><span class="toc-number">3.5.2.</span> <span class="toc-text">启用 SDDM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Plasma-%E6%A1%8C%E9%9D%A2"><span class="toc-number">3.5.3.</span> <span class="toc-text">安装 Plasma 桌面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%BF%85%E8%A6%81%E7%9A%84%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.5.4.</span> <span class="toc-text">安装必要的软件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E4%B8%8B%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">在图形界面下设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text">系统设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8C%BA%E5%9F%9F%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.1.</span> <span class="toc-text">语言和区域设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E6%BA%90%E3%80%81%E5%BC%80%E6%9C%BA%E3%80%81%E9%94%81%E5%B1%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.2.</span> <span class="toc-text">电源、开机、锁屏设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.3.</span> <span class="toc-text">高分辨率设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SDDM-%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.4.</span> <span class="toc-text">SDDM 设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E5%B1%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.5.</span> <span class="toc-text">锁屏设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.6.</span> <span class="toc-text">自动启动设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.1.7.</span> <span class="toc-text">自动挂载设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">终端快捷键配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pacman-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">4.3.</span> <span class="toc-text">pacman 包管理器的使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">4.3.1.</span> <span class="toc-text">下载软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">4.3.2.</span> <span class="toc-text">删除软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">4.3.3.</span> <span class="toc-text">更新软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">4.3.4.</span> <span class="toc-text">搜索软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">4.3.5.</span> <span class="toc-text">检查依赖关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%8D%E7%BA%A7%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">4.3.6.</span> <span class="toc-text">降级软件包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%85%E7%90%86%E7%BC%93%E5%AD%98"><span class="toc-number">4.3.7.</span> <span class="toc-text">清理缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E5%8C%85%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">4.3.8.</span> <span class="toc-text">从本地安装包安装软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E-PKGBUILD-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">4.3.9.</span> <span class="toc-text">从 PKGBUILD 安装软件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AUR-%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93"><span class="toc-number">4.4.</span> <span class="toc-text">AUR 软件仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#paru"><span class="toc-number">4.4.1.</span> <span class="toc-text">paru</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#octopi"><span class="toc-number">4.4.2.</span> <span class="toc-text">octopi</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arch-Linux-CN-%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">Arch Linux CN 软件仓库（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arch4edu-%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">Arch4edu 软件仓库（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.7.</span> <span class="toc-text">双系统启动设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-%E6%8C%82%E8%BD%BD-Windows-%E7%A3%81%E7%9B%98"><span class="toc-number">4.8.</span> <span class="toc-text">Linux 挂载 Windows 磁盘</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-fstab-%E6%96%87%E4%BB%B6"><span class="toc-number">4.8.1.</span> <span class="toc-text">使用 fstab 文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8C%82%E8%BD%BD-NTFS-%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98"><span class="toc-number">4.8.2.</span> <span class="toc-text">命令行挂载 NTFS 移动硬盘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.9.</span> <span class="toc-text">网络设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87"><span class="toc-number">4.9.1.</span> <span class="toc-text">网络设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ping-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.9.2.</span> <span class="toc-text">ping 命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5-PKU-Wi-Fi"><span class="toc-number">4.9.3.</span> <span class="toc-text">命令行连接 PKU Wi-Fi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5-PKU-VPN"><span class="toc-number">4.9.4.</span> <span class="toc-text">命令行连接 PKU VPN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5-PKU-Secure"><span class="toc-number">4.9.5.</span> <span class="toc-text">图形化界面连接 PKU Secure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5-PKU-Secure"><span class="toc-number">4.9.6.</span> <span class="toc-text">命令行连接 PKU Secure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ThinkPad%EF%BC%9A%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E8%AE%BE%E7%BD%AE%E7%A7%BB%E5%8A%A8%E5%AE%BD%E5%B8%A6%E7%BD%91%E7%BB%9C"><span class="toc-number">4.9.7.</span> <span class="toc-text">ThinkPad：图形化界面设置移动宽带网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-hosts-%E6%96%87%E4%BB%B6%E8%AE%BF%E9%97%AE-GitHub"><span class="toc-number">4.9.8.</span> <span class="toc-text">修改 hosts 文件访问 GitHub</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%9B%9E%E7%8E%AF%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.9.9.</span> <span class="toc-text">不显示回环连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E9%85%8D%E7%BD%AE"><span class="toc-number">4.10.</span> <span class="toc-text">Vim 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GNU-nano-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">4.11.</span> <span class="toc-text">GNU nano 下载与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2%E8%BE%93%E5%87%BA%E8%AF%AD%E8%A8%80%E4%B8%BA%E8%8B%B1%E8%AF%AD"><span class="toc-number">4.12.</span> <span class="toc-text">命令行界面输出语言为英语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.13.</span> <span class="toc-text">时间设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E4%B8%8D%E5%90%8C%E6%AD%A5"><span class="toc-number">4.13.1.</span> <span class="toc-text">双系统时间不同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%97%B6%E9%92%9F%E8%AE%BE%E7%BD%AE-24-%E5%B0%8F%E6%97%B6%E5%88%B6"><span class="toc-number">4.13.2.</span> <span class="toc-text">数字时钟设置 24 小时制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-TUNA-%E7%BD%91%E7%BB%9C%E6%8E%88%E6%97%B6%E6%9C%8D%E5%8A%A1%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.13.3.</span> <span class="toc-text">添加 TUNA 网络授时服务（可选）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E5%AE%89%E8%A3%85"><span class="toc-number">4.14.</span> <span class="toc-text">字体安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85%E5%AD%97%E4%BD%93"><span class="toc-number">4.14.1.</span> <span class="toc-text">命令行安装字体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93"><span class="toc-number">4.14.2.</span> <span class="toc-text">安装中文字体</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">4.15.</span> <span class="toc-text">安装中文输入法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Fcitx5-%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">4.15.1.</span> <span class="toc-text">安装 Fcitx5 输入法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8E%E8%AF%8D%E5%BA%93"><span class="toc-number">4.15.2.</span> <span class="toc-text">配置与词库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%89%88%E6%9C%AC"><span class="toc-number">4.15.3.</span> <span class="toc-text">其它版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Firefox-%E7%9A%84%E4%B8%AD%E6%96%87%E8%AF%AD%E8%A8%80%E5%8C%85"><span class="toc-number">4.16.</span> <span class="toc-text">安装 Firefox 的中文语言包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E5%90%AF%E5%8A%A8%E5%92%8C%E5%85%B3%E6%9C%BA%E6%97%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">4.17.</span> <span class="toc-text">关闭启动和关机时的系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%99%BB%E5%BD%95%E6%97%B6%E8%87%AA%E5%8A%A8%E8%A7%A3%E9%94%81-KWallet"><span class="toc-number">4.18.</span> <span class="toc-text">在登录时自动解锁 KWallet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E9%85%8D%E7%BD%AE"><span class="toc-number">4.19.</span> <span class="toc-text">Git 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NTFS-%E7%A3%81%E7%9B%98%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD"><span class="toc-number">4.20.</span> <span class="toc-text">NTFS 磁盘无法挂载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%88%86%E5%8C%BA%E6%94%B9%E5%8F%98%E5%AF%BC%E8%87%B4%E6%97%B6%E8%BF%9B%E5%85%A5-GRUB-Rescue-%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.21.</span> <span class="toc-text">系统分区改变导致时进入 GRUB Rescue 模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E-USB-%E5%90%AF%E5%8A%A8%E7%9B%98%E5%90%AF%E5%8A%A8"><span class="toc-number">4.22.</span> <span class="toc-text">从 USB 启动盘启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E6%95%B4%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D%E7%A7%B0%E4%B8%BA%E8%8B%B1%E6%96%87"><span class="toc-number">4.23.</span> <span class="toc-text">调整文件夹名称为英文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.24.</span> <span class="toc-text">蓝牙连接设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9E%E6%8E%A5%E8%93%9D%E7%89%99"><span class="toc-number">4.24.1.</span> <span class="toc-text">命令行连接蓝牙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SONY-WH-1000XM3-%E8%80%B3%E6%9C%BA%E7%9A%84%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.24.2.</span> <span class="toc-text">SONY WH-1000XM3 耳机的蓝牙连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Logitech-%E5%A4%9A%E8%AE%BE%E5%A4%87%E9%BC%A0%E6%A0%87%E7%9A%84%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.24.3.</span> <span class="toc-text">Logitech 多设备鼠标的蓝牙连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E7%99%BB%E5%BD%95-Root-%E7%94%A8%E6%88%B7%E6%B2%A1%E6%9C%89%E5%A3%B0%E9%9F%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.25.</span> <span class="toc-text">解决登录 Root 用户没有声音的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3-Gwenview-%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E5%A4%A7%E5%9E%8B%E5%9B%BE%E7%89%87%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.26.</span> <span class="toc-text">解决 Gwenview 无法打开大型图片的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E5%92%8C%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2"><span class="toc-number">4.27.</span> <span class="toc-text">切换图形化界面和命令行界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E6%96%B9%E6%A1%88"><span class="toc-number">4.28.</span> <span class="toc-text">电源管理方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2"><span class="toc-number">4.28.1.</span> <span class="toc-text">使用图形界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="toc-number">4.28.2.</span> <span class="toc-text">使用命令行工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NVIDIA-%E6%98%BE%E5%8D%A1"><span class="toc-number">4.29.</span> <span class="toc-text">NVIDIA 显卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%BB%93%E5%BA%93"><span class="toc-number">4.30.</span> <span class="toc-text">切换软件包仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8-multilib-%E4%BB%93%E5%BA%93%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.30.1.</span> <span class="toc-text">启用 multilib 仓库（可选）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E6%B5%8B%E8%AF%95%E4%BB%93%E5%BA%93%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.30.2.</span> <span class="toc-text">启用测试仓库（可选）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8-kde-unstable-%E4%BB%93%E5%BA%93%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.30.3.</span> <span class="toc-text">启用 kde-unstable 仓库（可选）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0%E5%85%B6%E5%AE%83%E5%86%85%E6%A0%B8%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.31.</span> <span class="toc-text">切换到其它内核（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.32.</span> <span class="toc-text">应用程序的快捷键配置（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%89%93%E5%8D%B0%E6%9C%BA%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.33.</span> <span class="toc-text">添加打印机（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intel-%E7%A1%AC%E4%BB%B6%E8%A7%86%E9%A2%91%E5%8A%A0%E9%80%9F%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.34.</span> <span class="toc-text">Intel 硬件视频加速（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA-pacman-%E5%90%AF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.35.</span> <span class="toc-text">为 pacman 启用多线程下载（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">4.36.</span> <span class="toc-text">建立交换文件（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%BC%80%E5%90%AF-Secure-Boot%EF%BC%88%E6%9C%AA%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="toc-number">4.37.</span> <span class="toc-text">重新开启 Secure Boot（未测试）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Galaxy-Rotation-Model-and-HVC/" title="银河系旋转模型与高速云"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/Milky_Way.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="银河系旋转模型与高速云"/></a><div class="content"><a class="title" href="/Galaxy-Rotation-Model-and-HVC/" title="银河系旋转模型与高速云">银河系旋转模型与高速云</a><time datetime="2025-02-25T14:00:00.000Z" title="发表于 2025-02-25 22:00:00">2025-02-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Time-Calculator/" title="时间计算器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/time.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间计算器"/></a><div class="content"><a class="title" href="/Time-Calculator/" title="时间计算器">时间计算器</a><time datetime="2021-11-02T16:00:00.000Z" title="发表于 2021-11-03 00:00:00">2021-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Arch-Linux-Installation/" title="Arch Linux 双系统安装指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/archlinux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Arch Linux 双系统安装指南"/></a><div class="content"><a class="title" href="/Arch-Linux-Installation/" title="Arch Linux 双系统安装指南">Arch Linux 双系统安装指南</a><time datetime="2021-09-07T14:00:00.000Z" title="发表于 2021-09-07 22:00:00">2021-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Hello-World/" title="Hello World"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/PKU_peach_blossom.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/Hello-World/" title="Hello World">Hello World</a><time datetime="2021-09-06T04:00:00.000Z" title="发表于 2021-09-06 12:00:00">2021-09-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/monterey_light.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Firestar</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

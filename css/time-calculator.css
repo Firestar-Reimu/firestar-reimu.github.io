@@ -1,0 +1,18 @@
+td {
+    text-align: center;
+}
+
+.button {
+    background-color: #FF5500;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.clock {
+    font-size: 24px;
+    padding: 8px 16px;
+}
